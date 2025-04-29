@@ -1,0 +1,89 @@
+/* Collection wrapper styling */
+.collection-wrapper {
+    padding: 2rem;
+    padding-top: 80px; /* Adjust based on your Navbar height */
+    overflow-x: auto; /* Allow horizontal scrolling if needed */
+  }
+  
+  /* Collection header */
+  .collection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+  }
+  
+  /* Collection header title */
+  .collection-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  
+  /* 'View all' button styling */
+  .view-all {
+    font-size: 0.9rem;
+    color: #000;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Collection grid styling - horizontal scroll, no wrap */
+  .collection-grid {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent items from wrapping */
+    justify-content: flex-start;
+    gap: 1.5rem; /* Controls horizontal spacing */
+    overflow-x: auto; /* Allow horizontal scroll if needed */
+    padding-bottom: 1rem;
+  }
+  
+  /* Collection card */
+  .collection-image-container {
+    text-align: center;
+    cursor: pointer;
+    width: 130px;
+    flex-shrink: 0; /* Prevent shrinking on small screens */
+    transition: transform 0.2s ease;
+  }
+  
+  .collection-image-container:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Circle image */
+  .collection-image {
+    width: 130px !important;
+    height: 130px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    margin: 0 auto;
+    display: block;
+  }
+  
+  /* Collection name */
+  .collection-image-container h3 {
+    margin-top: 0.5rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  
+  /* Description and arrow */
+  .collection-image-container p {
+    font-size: 0.8rem;
+    color: #555;
+    margin-top: 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+  }
+  
+  /* Arrow styling */
+  .arrow {
+    font-weight: bold;
+  }
+  

@@ -1,0 +1,71 @@
+/* Add a modern font family */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+.promo-section {
+  margin-top: 40px;
+  background: #f5f5f5;
+  padding: 10px 0;
+  font-family: 'Poppins', sans-serif; /* Use the Poppins font */
+}
+
+.promo-line {
+  border: none;
+  border-top: 2px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.promo-marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.promo-track {
+  display: inline-block;
+  animation: scroll 25s linear infinite;
+  display: flex; /* Use flex to align items side by side */
+}
+
+.promo-track span {
+  display: inline-block;
+  margin: 0 30px;
+  font-size: 1.2rem;
+  font-weight: Bold;
+  color: #111;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.promo-track .black-btn {
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: Bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.promo-track .black-btn:hover {
+  background: #ff5722;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Add duplicate content to ensure continuous scrolling */
+.promo-marquee::after {
+  content: attr(data-duplicate);
+  display: inline-block;
+}
+

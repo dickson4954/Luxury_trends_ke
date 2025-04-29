@@ -1,0 +1,157 @@
+.hero-section {
+  position: relative;
+  height: 100vh; /* Ensures the section takes full screen height */
+  background-size: cover; /* Ensures the image covers the entire section */
+  background-position: center; /* Keeps the image centered */
+  padding-top: 120px; /* Offsets navbar height */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  position: absolute; /* Overlay sits above the background */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  z-index: 0; /* Overlay stays behind the content */
+}
+
+.hero-content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1200px;
+  gap: 3rem;
+  z-index: 1; /* Content stays above the overlay */
+  position: relative; /* Ensures z-index works */
+}
+
+.hero-left {
+  max-width: 50%;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.hero-text {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.hero-buttons .btn {
+  margin-right: 1rem;
+  padding: 0.8rem 1.5rem;
+  background-color: white;
+  color: black;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.hero-buttons .btn:hover {
+  background-color: #f1f1f1;
+}
+
+.hero-right {
+  width: 300px;
+}
+
+.hero-form {
+  background: rgba(255, 255, 255, 0.95); /* Slight opacity for background */
+  color: black;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.hero-form h3 {
+  margin-bottom: 1rem;
+}
+
+.hero-form select,
+.search-btn {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
+.search-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-btn:hover {
+  background-color: #555;
+}
+
+/* Optional: make it responsive */
+@media (max-width: 1024px) {
+  .hero-content-wrapper {
+    gap: 2rem; /* Adjust the gap */
+  }
+
+  .hero-left {
+    max-width: 60%; /* Slightly reduce left section width */
+  }
+
+  .hero-right {
+    width: 250px; /* Adjust the right form container */
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content-wrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-left, .hero-right {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-form {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem; /* Reduce title size for smaller screens */
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem; /* Adjust subtitle for smaller screens */
+  }
+
+  .hero-text {
+    font-size: 1rem; /* Adjust text for smaller screens */
+  }
+
+  .hero-buttons .btn {
+    padding: 0.6rem 1.2rem; /* Adjust button size for mobile */
+  }
+}

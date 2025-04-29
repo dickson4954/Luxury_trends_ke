@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+.footer {
+    background-color: #f1f1f1; /* Adjusted to a softer light gray */
+    padding: 60px 30px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: #333;
+  }
+  
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  width: 100%;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.footer-section {
+  flex: 1 1 220px;
+}
+
+.footer-section h3,
+.footer-section h4 {
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 17px;
+  color: #111;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+  font-weight: 400;
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li:hover {
+  color: #000;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.footer-socials a {
+  color: #333;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.footer-socials a:hover {
+  color: #000;
+}
+/* Increase all icons inside .footer-socials */
+.footer-socials svg {
+    font-size: 28px;   /* try 28px (or whatever size you prefer) */
+    width: 1em;        /* ensures they scale with font-size */
+    height: 1em;
+  }
+  
+
+.newsletter-input {
+  display: flex;
+  margin-top: 12px;
+}
+
+.newsletter-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+}
+
+.newsletter-input button {
+  padding: 10px 14px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.newsletter-input button:hover {
+  background-color: #333;
+}
