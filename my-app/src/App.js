@@ -5,6 +5,8 @@ import AllCollections from './Components/AllCollections';
 import CollectionDetail from './Components/CollectionDetail';
 import ContactPage from './Components/ContactPage';  // Use ContactPage here
 import Navbar from './Components/Navbar'; 
+import TrendingAll from './Components/TrendingAll';
+import TrendingNow from './Components/TrendingNow';
 import './App.css';
 
 const App = () => {
@@ -17,6 +19,8 @@ const App = () => {
         <Route path="/collections" element={<AllCollections />} />
         <Route path="/collections/:type" element={<CollectionDetail />} />
         <Route path="/contact" element={<ContactPage />} />  {/* Use ContactPage here */}
+        <Route path="/" element={<TrendingNow />} />
+        <Route path="/trending" element={<TrendingAll />} />
       </Routes>
     </div>
   );

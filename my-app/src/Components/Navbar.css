@@ -130,7 +130,7 @@
   left: 0;
   width: 100vw;         /* full viewport width */
   background: white;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  box-shadow: none;
   padding: 20px 40px;
   z-index: 1100;
   display: flex;

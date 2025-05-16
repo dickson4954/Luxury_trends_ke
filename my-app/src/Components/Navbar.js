@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Navbar.css';
 import { FaUser, FaShoppingCart, FaMicrophone } from 'react-icons/fa';
-import { Link } from 'react-router-dom'; // <-- import Link for routing
+import { Link } from 'react-router-dom'; 
 import logo from '../Images/luxury_trends.jpg';
 
 // Category Images
@@ -124,7 +124,7 @@ const Navbar = () => {
               )}
             </li>
           ))}
-          {/* Add Contact as a simple link */}
+          
           <li className="contact-link">
             <Link to="/contact">Contact</Link>
           </li>

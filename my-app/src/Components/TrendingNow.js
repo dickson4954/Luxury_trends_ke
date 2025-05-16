@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './TrendingNow.css';
 
 import humidifier from '../Images/tier.jpeg';
@@ -43,42 +44,62 @@ const trendingItems = [
 ];
 
 const TrendingNow = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="trending-now">
-      <div className="trending-header">
+    <section className="trending-now">
+      <header className="trending-header">
         <h2 className="trending-title">Trending Now</h2>
-        <button className="view-all-button">View All</button>
-      </div>
+        <button
+          className="view-all-button"
+          onClick={() => navigate('/trending')}
+          aria-label="View all trending products"
+        >
+          View All
+        </button>
+      </header>
+
       <div className="trending-grid">
         {trendingItems.map((item, index) => (
-          <div className="trending-card" key={index}>
+          <article className="trending-card" key={index} tabIndex="0" aria-label={item.title}>
             {item.onSale && <span className="sale-badge">Sale</span>}
-            <img src={item.image} alt={item.title} className="trending-image" />
+            <img
+              src={item.image}
+              alt={item.title}
+              className="trending-image"
+              loading="lazy"
+            />
             <p className="trending-title-text">{item.title}</p>
             <p className="trending-price">{item.price}</p>
             {item.oldPrice && <p className="trending-old-price">{item.oldPrice}</p>}
-          </div>
+          </article>
         ))}
       </div>
 
       {/* Inspiration Section */}
-      <div className="inspiration-section">
+      <section className="inspiration-section" aria-labelledby="inspiration-heading">
         <div className="inspiration-content">
           <div className="inspiration-image">
-            <img src={inspirationImage} alt="Home Inspiration" />
+            <img
+              src={inspirationImage}
+              alt="Home Inspiration"
+              loading="lazy"
+            />
           </div>
           <div className="inspiration-text">
-            <h2>Stay Inspired...</h2>
+            <h2 id="inspiration-heading">Stay Inspired...</h2>
             <p>
-              Looking to refresh your space or add a touch of personality? Discover unique pieces 
-              that elevate your home's style effortlessly. From cozy accents to bold statement decor, 
+              Looking to refresh your space or add a touch of personality? Discover unique pieces
+              that elevate your home's style effortlessly. From cozy accents to bold statement decor,
               find everything you need to express your vibe.
             </p>
-            <a href="#shop" className="shop-now-btn">Shop Now</a>
+            <a href="#shop" className="shop-now-btn" aria-label="Shop now">
+              Shop Now
+            </a>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </section>
   );
 };
 
