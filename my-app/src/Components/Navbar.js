@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Navbar.css';
 import { FaUser, FaShoppingCart, FaMicrophone } from 'react-icons/fa';
+import { Link } from 'react-router-dom'; // <-- import Link for routing
 import logo from '../Images/luxury_trends.jpg';
 
 // Category Images
@@ -31,14 +32,7 @@ import limitedOfferImg from '../Images/storage.jpg';
 import flashSaleImg from '../Images/tier.jpeg';
 import holidaySpecialImg from '../Images/travel.jpeg';
 
-// Contact Images
-import customerSupportImg from '../Images/bedrooms.jpg';
-import returnPolicyImg from '../Images/Bedroom.jpeg';
-import storeLocationImg from '../Images/cutlery.jpg';
-import feedbackImg from '../Images/appliances.jpeg';
-import faqsImg from '../Images/flameless.jpeg';
-
-// Menu Items
+// Filter out the Contact menu item to remove the dropdown
 const menuItems = [
   {
     title: 'Categories',
@@ -59,11 +53,6 @@ const menuItems = [
     title: 'Sale & Offers',
     subcategories: ['Clearance', 'Discount Deals', 'Limited Offers', 'Flash Sales', 'Holiday Specials'],
     images: [clearanceImg, discountDealImg, limitedOfferImg, flashSaleImg, holidaySpecialImg],
-  },
-  {
-    title: 'Contact',
-    subcategories: ['Customer Support', 'Return Policy', 'Store Locations', 'Feedback', 'FAQs'],
-    images: [customerSupportImg, returnPolicyImg, storeLocationImg, feedbackImg, faqsImg],
   },
 ];
 
@@ -135,6 +124,10 @@ const Navbar = () => {
               )}
             </li>
           ))}
+          {/* Add Contact as a simple link */}
+          <li className="contact-link">
+            <Link to="/contact">Contact</Link>
+          </li>
         </ul>
       </nav>
     </header>
