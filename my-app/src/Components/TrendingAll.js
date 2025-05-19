@@ -63,7 +63,7 @@ const TrendingAll = () => {
               {item.oldPrice && <span className="old-price">{item.oldPrice}</span>}
             </p>
 
-            {/* Placeholder for add to cart or details button */}
+         
             <button className="btn-primary" aria-label={`Add ${item.title} to cart`}>
               Add to Cart
             </button>

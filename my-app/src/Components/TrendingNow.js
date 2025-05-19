@@ -7,7 +7,7 @@ import kitchenToy from '../Images/wall.jpg';
 import towelRack from '../Images/cutlery.jpg';
 import glassSet from '../Images/layer.jpeg';
 import laptopTable from '../Images/flameless.jpeg';
-import inspirationImage from '../Images/piration.jpg'; // replace with actual image file name
+import inspirationImage from '../Images/piration.jpg'; 
 
 const trendingItems = [
   {
@@ -76,7 +76,7 @@ const TrendingNow = () => {
         ))}
       </div>
 
-      {/* Inspiration Section */}
+     
       <section className="inspiration-section" aria-labelledby="inspiration-heading">
         <div className="inspiration-content">
           <div className="inspiration-image">

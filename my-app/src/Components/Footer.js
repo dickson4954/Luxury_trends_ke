@@ -1,5 +1,5 @@
 import React from 'react';
-import './Footer.css'; // Make sure to create and style this file
+import './Footer.css'; 
 import { FaFacebookF, FaInstagram, FaWhatsapp, FaTiktok, FaTwitter, FaPhoneAlt, FaMapMarkerAlt, FaGlobe } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 
@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-container">
-        {/* HomeLux Kenya Section */}
+       
         <div className="footer-section">
           <h3>Luxury_trends_ke</h3>
           <p><strong>Luxury_trends_ke Kenya</strong></p>
@@ -24,8 +24,6 @@ const Footer = () => {
             <FaTwitter />
           </div>
         </div>
-
-        {/* Customer Service Section */}
         <div className="footer-section">
           <h4>Customer Service</h4>
           <ul>
@@ -36,14 +34,10 @@ const Footer = () => {
             <li>Contact us</li>
           </ul>
         </div>
-
-        {/* Shipping Section */}
         <div className="footer-section">
           <h4>Shipping</h4>
           <p>Shipping from Abroad: Terms & Conditions</p>
         </div>
-
-        {/* Newsletter Section */}
         <div className="footer-section">
           <h4>Newsletter</h4>
           <p>Sign up for exclusive offers, original stories, events and more.</p>

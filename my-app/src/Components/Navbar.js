@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import './Navbar.css';
-import { FaUser, FaShoppingCart, FaMicrophone } from 'react-icons/fa';
-import { Link } from 'react-router-dom'; 
+import { FaShoppingCart, FaMicrophone, FaChevronDown } from 'react-icons/fa';
+
+import { Link } from 'react-router-dom';
 import logo from '../Images/luxury_trends.jpg';
+import LoginPage from '../Components/LoginPage';
 
 // Category Images
 import homeDecorImg from '../Images/appliances.jpeg';
@@ -32,7 +34,6 @@ import limitedOfferImg from '../Images/storage.jpg';
 import flashSaleImg from '../Images/tier.jpeg';
 import holidaySpecialImg from '../Images/travel.jpeg';
 
-// Filter out the Contact menu item to remove the dropdown
 const menuItems = [
   {
     title: 'Categories',
@@ -58,79 +59,79 @@ const menuItems = [
 
 const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [showLoginForm, setShowLoginForm] = useState(false);
 
-  const handleMouseEnter = (item) => {
-    setActiveDropdown(item);
-  };
-
-  const handleMouseLeave = () => {
-    setActiveDropdown(null);
-  };
+  const handleMouseEnter = (item) => setActiveDropdown(item);
+  const handleMouseLeave = () => setActiveDropdown(null);
+  const toggleLoginForm = () => setShowLoginForm((prev) => !prev);
 
   return (
-    <header className="navbar">
-      <div className="navbar-top">
-        <div className="navbar-logo">
-          <img src={logo} alt="Logo" />
-          <p className="logo-text">Luxury Trends Ke</p>
-        </div>
+    <>
+      <header className="navbar">
+        <div className="navbar-top">
+          <div className="navbar-logo">
+            <img src={logo} alt="Luxury Trends Logo" />
+            <div className="logo-text">Luxury Trends Ke</div>
+          </div>
 
-        <div className="navbar-search">
-          <select>
-            <option value="all">All</option>
-          </select>
-          <input type="text" placeholder="Search for articles" />
-          <button className="mic-btn"><FaMicrophone /></button>
-        </div>
+          <div className="navbar-search">
+            <select aria-label="Search category">
+              <option value="all">All</option>
+            </select>
+            <input type="search" placeholder="Search for collections" aria-label="Search input" />
+            <button className="mic-btn" aria-label="Voice search">
+              <FaMicrophone />
+            </button>
+          </div>
 
-        <div className="navbar-icons">
-          <FaUser />
-          <div className="cart-icon">
-            <FaShoppingCart />
-            <span className="cart-count">1</span>
+          <div className="navbar-icons">
+            <div className="icon-button" onClick={toggleLoginForm} role="button" aria-label="Login">
+  <img src="https://i.pinimg.com/736x/66/fd/c9/66fdc942505a8d4e8adaef76845bf744.jpg" alt="Profile" className="profile-icon" style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }} />
+</div>
+            <div className="icon-button" aria-label="Shopping Cart">
+              <FaShoppingCart />
+            </div>
           </div>
         </div>
-      </div>
 
-      <nav className="navbar-bottom">
-        <ul>
-          {menuItems.map((item) => (
-            <li
-              key={item.title}
-              className="categories-container"
-              onMouseEnter={() => handleMouseEnter(item)}
-              onMouseLeave={handleMouseLeave}
-            >
-              {item.title} ▾
-              {activeDropdown?.title === item.title && (
-                <div
-                  className="dropdown-menu"
-                  onMouseEnter={() => handleMouseEnter(item)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <div className="categories-list">
-                    {item.subcategories.map((subcategory, idx) => (
-                      <div key={idx} className="category-item">
-                        {subcategory}
-                      </div>
-                    ))}
+        <nav className="navbar-bottom">
+          <ul>
+            {menuItems.map((item) => (
+              <li
+                key={item.title}
+                className="navbar-item"
+                onMouseEnter={() => handleMouseEnter(item)}
+                onMouseLeave={handleMouseLeave}
+              >
+                {item.title} <FaChevronDown className="dropdown-icon" />
+                {activeDropdown?.title === item.title && (
+                  <div className="dropdown-menu">
+                    <div className="dropdown-content">
+                      {item.subcategories.map((subcategory, idx) => (
+                        <div key={idx} className="dropdown-item">
+                          {subcategory}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div className="category-images">
-                    {item.images.map((img, index) => (
-                      <img key={index} src={img} alt="Category" />
-                    ))}
-                  </div>
-                </div>
-              )}
+                )}
+              </li>
+            ))}
+            <li>
+              <Link to="/contact">Contact</Link>
             </li>
-          ))}
-          
-          <li className="contact-link">
-            <Link to="/contact">Contact</Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
+          </ul>
+        </nav>
+      </header>
+
+      {showLoginForm && (
+        <div className="login-form-overlay" onClick={toggleLoginForm} role="dialog" aria-modal="true">
+          <div className="login-form-container" onClick={(e) => e.stopPropagation()}>
+            <LoginPage />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
