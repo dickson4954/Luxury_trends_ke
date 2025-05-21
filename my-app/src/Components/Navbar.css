@@ -8,6 +8,7 @@
   background-color: #fff;
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Top Section of Navbar */
@@ -29,6 +30,7 @@
 
 .navbar-logo img {
   height: 60px;
+  user-select: none;
 }
 
 /* Logo Text Styling */
@@ -43,10 +45,10 @@
   background: linear-gradient(45deg, #ff7a18, #af002d, #319197);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  /* For Firefox */
   background-clip: text;
   color: transparent;
   text-shadow: none;
+  user-select: none;
 }
 
 /* Search Bar Styling */
@@ -56,25 +58,35 @@
   flex: 1;
   max-width: 600px;
   margin: 0 30px;
+  background: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .navbar-search select {
   width: 90px;
-  border-right: 1px solid #ccc;
-  min-width: 200px;
-  padding: 10px;
   border: none;
-  background: #eee;
+  padding: 10px 12px;
+  background: #ddd;
+  cursor: pointer;
   outline: none;
+  font-weight: 600;
+  color: #333;
+}
+
+.navbar-search select:hover {
+  background: #ccc;
 }
 
 .navbar-search input {
-  padding: 10px;
+  padding: 10px 15px;
   border: none;
-  background: #eee;
+  background: transparent;
   outline: none;
   flex: 1;
-  width: 100%;
+  font-size: 1rem;
+  color: #333;
 }
 
 /* Microphone Button */
@@ -84,6 +96,14 @@
   padding: 10px;
   cursor: pointer;
   font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.mic-btn:hover {
+  background: #ddd;
 }
 
 /* User & Cart Icons */
@@ -100,23 +120,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.cart-icon {
-  position: relative;
-  font-size: 2rem;
-  cursor: pointer;
-}
-
-.cart-count {
-  position: absolute;
-  top: -6px;
-  right: -8px;
-  background: gray;
-  color: #fff;
-  font-size: 0.85rem;
-  padding: 4px 8px;
+  transition: transform 0.2s ease;
   border-radius: 50%;
+  overflow: hidden;
+}
+
+.icon-button:hover {
+  transform: scale(1.1);
+}
+
+.icon-button img {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 /* Bottom Navigation */
@@ -127,58 +145,119 @@
   margin-top: 10px;
   padding-left: 0;
   font-weight: bold;
+  font-size: 1rem;
 }
 
-.categories-container {
+.navbar-bottom ul li {
   position: relative;
   cursor: pointer;
+  padding: 10px 8px;
+  user-select: none;
+  display: flex;
+  align-items: center;
 }
 
-/* Dropdown Menu */
+.navbar-bottom ul li a {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.2s ease;
+}
+
+.navbar-bottom ul li a:hover {
+  color: #af002d;
+}
+
+/* Dropdown Menu Container - FULL SCREEN WIDTH */
 .dropdown-menu {
   position: absolute;
-  top: 100%; /* Just below the navbar */
+  top: 100%; /* Below navbar */
   left: 0;
-  min-width: 800px;
-  max-width: 1000px;
-  display: flex;
+  width: 100vw; /* Full viewport width */
   background: white;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-  padding: 20px;
-  z-index: 999;
-  margin-top: 10px;
-  border-radius: 6px;
-}
-
-.categories-list {
-  flex: 1;
-  border-right: 1px solid #eee;
-}
-
-.category-item {
-  padding: 10px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
-}
-
-.category-item:hover {
-  background-color: #f5f5f5;
-}
-
-.category-images {
-  flex: 2;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  padding: 20px 40px;
+  z-index: 9999;
+  border-top: 3px solid #af002d;
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding-left: 20px;
+  justify-content: center;
+  user-select: none;
 }
 
-.category-images img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 4px;
+/* Inner dropdown content container with max width */
+.dropdown-content {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  gap: 40px;
+}
+
+/* Left column: subcategory list */
+.subcategory-list {
+  flex: 1 1 35%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-right: 1px solid #eee;
+  padding-right: 30px;
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+/* Each subcategory item */
+.subcategory-item {
+  cursor: pointer;
+  padding: 12px 18px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, font-weight 0.3s ease;
+  font-weight: 600;
+  color: #444;
+  user-select: none;
+}
+
+.subcategory-item:hover,
+.subcategory-item.active {
+  background-color: #f7f7f7;
+  font-weight: 700;
+  color: #af002d;
+  outline: none;
+}
+
+/* Right column: image */
+.subcategory-image {
+  flex: 1 1 65%;
+  padding-left: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subcategory-image img {
+  width: 100%;
+  max-height: 350px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  user-select: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Scrollbar styling */
+.subcategory-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+.subcategory-list::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.subcategory-list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 8px;
+}
+
+.subcategory-list::-webkit-scrollbar-thumb:hover {
+  background: #999;
 }
 
 /* Login Form Modal Overlay */
@@ -203,4 +282,34 @@
   max-width: 400px;
   width: 90%;
   box-shadow: 0 0 10px rgba(0,0,0,0.25);
+  user-select: text;
+}
+
+/* Responsive: Stack dropdown vertically on small screens */
+@media (max-width: 900px) {
+  .dropdown-menu {
+    padding: 15px 20px;
+  }
+  .dropdown-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .subcategory-list {
+    border-right: none;
+    padding-right: 0;
+    max-height: none;
+    overflow: visible;
+  }
+  .subcategory-image {
+    padding-left: 0;
+    margin-top: 10px;
+  }
+}
+
+/* Accessibility: Focus styles */
+.subcategory-item:focus {
+  outline: 3px solid #af002d;
+  background-color: #fceaea;
+  font-weight: 700;
+  color: #af002d;
 }

@@ -1,0 +1,83 @@
+import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import './ProductDetails.css';
+import { FaShoppingBag, FaArrowLeft } from 'react-icons/fa';
+import productsData from '../Components/Products';
+import { useCart } from '../Components/CartContext';
+import Cart from '../Components/Cart'; // 
+export default function ProductDetails() {
+  const { slug } = useParams();
+  const navigate = useNavigate();
+  const product = productsData.find(p => p.slug === slug);
+  const [qty, setQty] = useState(1);
+  const [currentImg, setCurrentImg] = useState(0);
+  const [isCartOpen, setIsCartOpen] = useState(false); 
+
+  const { addToCart } = useCart();
+
+  if (!product) return <div className="not-found">Product not found.</div>;
+
+  const handleAddToCart = () => {
+    addToCart({ ...product, quantity: qty });
+    setIsCartOpen(true); 
+  };
+
+  return (
+    <div className="product-details-page">
+      <button className="back-button" onClick={() => navigate(-1)}>
+        <FaArrowLeft /> Back
+      </button>
+
+      <div className="product-details-container">
+       
+        <div className="product-images">
+          <img src={product.images[currentImg]} alt={product.name} className="main-image" />
+          <div className="thumbnail-row">
+            {product.images.map((img, idx) => (
+              <img
+                key={idx}
+                src={img}
+                alt={`Thumbnail ${idx + 1}`}
+                className={`thumbnail ${idx === currentImg ? 'active' : ''}`}
+                onClick={() => setCurrentImg(idx)}
+              />
+            ))}
+          </div>
+        </div>
+
+        
+        <div className="product-info">
+          <h1 className="product-title">{product.name}</h1>
+          <p className="product-price">KSh{product.price.toLocaleString()}</p>
+          <p className="shipping-note">Shipping calculated at checkout.</p>
+          <p className="product-description">{product.description}</p>
+
+        
+          <div className="quantity-section">
+            <span>Quantity:</span>
+            <div className="quantity-selector">
+              <button onClick={() => setQty(prev => Math.max(1, prev - 1))}>−</button>
+              <span>{qty}</span>
+              <button onClick={() => setQty(prev => prev + 1)}>＋</button>
+            </div>
+          </div>
+
+    
+          <div className="action-buttons">
+            <button className="btn add-to-cart" onClick={handleAddToCart}>
+              Add to Cart
+            </button>
+            <button className="btn order-now">
+              <FaShoppingBag /> Order Now
+            </button>
+            <button className="btn pay-online">
+              Pay Online & Get Free Delivery!
+            </button>
+            <button className="btn buy-now">Buy Now</button>
+          </div>
+        </div>
+      </div>
+      {isCartOpen && <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />}
+    </div>
+  );
+}
