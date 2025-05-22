@@ -10,6 +10,7 @@ import TrendingNow from './Components/TrendingNow';
 import AllProducts from './Components/AllProducts';
 import ProductDetails from './Components/ProductDetails';
 import Cart from './Components/Cart';
+import PaymentPage from './Components/PaymentPage';
 import './App.css';
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/products" element={<AllProducts />} />
         <Route path="/product/:slug" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/payment" element={<PaymentPage />} />
       </Routes>
     </div>
   );
