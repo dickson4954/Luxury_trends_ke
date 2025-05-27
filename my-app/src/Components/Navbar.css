@@ -1,4 +1,4 @@
-/* Navbar Container */
+/* ===== NAVBAR CONTAINER ===== */
 .navbar {
   position: fixed;
   top: 0;
@@ -11,21 +11,22 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Top Section of Navbar */
+/* ===== NAVBAR TOP SECTION ===== */
 .navbar-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding: 0 10px;
 }
 
-/* Logo Styling */
+/* ===== LOGO STYLING ===== */
 .navbar-logo {
-  text-align: center;
-  margin-left: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: 30px;
+  text-align: center;
 }
 
 .navbar-logo img {
@@ -33,7 +34,6 @@
   user-select: none;
 }
 
-/* Logo Text Styling */
 .logo-text {
   margin-top: 5px;
   font-size: 16px;
@@ -47,27 +47,26 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
-  text-shadow: none;
   user-select: none;
 }
 
-/* Search Bar Styling */
+/* ===== SEARCH BAR ===== */
 .navbar-search {
   display: flex;
   align-items: center;
   flex: 1;
   max-width: 600px;
-  margin: 0 30px;
+  margin: 10px 30px;
   background: #eee;
   border-radius: 4px;
   overflow: hidden;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-search select {
   width: 90px;
-  border: none;
   padding: 10px 12px;
+  border: none;
   background: #ddd;
   cursor: pointer;
   outline: none;
@@ -80,16 +79,16 @@
 }
 
 .navbar-search input {
+  flex: 1;
   padding: 10px 15px;
   border: none;
   background: transparent;
   outline: none;
-  flex: 1;
   font-size: 1rem;
   color: #333;
 }
 
-/* Microphone Button */
+/* ===== MICROPHONE BUTTON ===== */
 .mic-btn {
   background: #eee;
   border: none;
@@ -106,7 +105,7 @@
   background: #ddd;
 }
 
-/* User & Cart Icons */
+/* ===== ICONS SECTION ===== */
 .navbar-icons {
   display: flex;
   align-items: center;
@@ -130,17 +129,17 @@
 }
 
 .icon-button img {
-  display: block;
   width: 40px;
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-/* Bottom Navigation */
+/* ===== BOTTOM NAVIGATION ===== */
 .navbar-bottom ul {
   list-style: none;
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
   margin-top: 10px;
   padding-left: 0;
@@ -152,9 +151,9 @@
   position: relative;
   cursor: pointer;
   padding: 10px 8px;
-  user-select: none;
   display: flex;
   align-items: center;
+  user-select: none;
 }
 
 .navbar-bottom ul li a {
@@ -167,31 +166,34 @@
   color: #af002d;
 }
 
-/* Dropdown Menu Container - FULL SCREEN WIDTH */
+/* ===== FULL-WIDTH DROPDOWN ===== */
 .dropdown-menu {
   position: absolute;
-  top: 100%; /* Below navbar */
+  top: 100%;
   left: 0;
-  width: 100vw; /* Full viewport width */
-  background: white;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-  padding: 20px 40px;
+  width: 100vw; /* full viewport width */
+  background: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  padding: 20px 60px; /* increased padding for breathing room */
   z-index: 9999;
   border-top: 3px solid #af002d;
   display: flex;
   justify-content: center;
   user-select: none;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
-/* Inner dropdown content container with max width */
+/* ===== DROPDOWN INNER CONTENT ===== */
 .dropdown-content {
   display: flex;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1300px;
   gap: 40px;
+  flex-direction: row;
 }
 
-/* Left column: subcategory list */
+/* LEFT COLUMN: SUBCATEGORY LIST */
 .subcategory-list {
   flex: 1 1 35%;
   display: flex;
@@ -201,9 +203,10 @@
   padding-right: 30px;
   max-height: 350px;
   overflow-y: auto;
+  box-sizing: border-box;
 }
 
-/* Each subcategory item */
+/* SUBCATEGORY ITEM */
 .subcategory-item {
   cursor: pointer;
   padding: 12px 18px;
@@ -219,29 +222,29 @@
   background-color: #f7f7f7;
   font-weight: 700;
   color: #af002d;
-  outline: none;
 }
 
-/* Right column: image */
+/* RIGHT COLUMN: IMAGE */
 .subcategory-image {
   flex: 1 1 65%;
   padding-left: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .subcategory-image img {
-  width: 100%;
-  max-height: 350px;
+  max-width: 320px;
+  max-height: 180px;
   object-fit: contain;
   border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
   user-select: none;
   transition: opacity 0.3s ease;
 }
 
-/* Scrollbar styling */
+/* ===== SCROLLBAR STYLING ===== */
 .subcategory-list::-webkit-scrollbar {
   width: 10px;
 }
@@ -260,53 +263,70 @@
   background: #999;
 }
 
-/* Login Form Modal Overlay */
+/* ===== LOGIN FORM OVERLAY ===== */
 .login-form-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2000;
 }
 
-/* Login Form Container */
+/* ===== LOGIN FORM CONTAINER ===== */
 .login-form-container {
-  background: white;
+  background: #fff;
   padding: 30px;
   border-radius: 10px;
   max-width: 400px;
   width: 90%;
-  box-shadow: 0 0 10px rgba(0,0,0,0.25);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   user-select: text;
 }
 
-/* Responsive: Stack dropdown vertically on small screens */
+/* ===== MEDIA QUERIES FOR RESPONSIVENESS ===== */
 @media (max-width: 900px) {
   .dropdown-menu {
     padding: 15px 20px;
   }
+
   .dropdown-content {
     flex-direction: column;
     gap: 20px;
   }
+
   .subcategory-list {
     border-right: none;
     padding-right: 0;
     max-height: none;
     overflow: visible;
   }
+
   .subcategory-image {
     padding-left: 0;
     margin-top: 10px;
   }
+
+  .navbar-top {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .navbar-search {
+    margin: 10px 0;
+    width: 100%;
+  }
+
+  .navbar-icons {
+    margin: 10px 0;
+  }
 }
 
-/* Accessibility: Focus styles */
+/* ===== ACCESSIBILITY: FOCUS STATE ===== */
 .subcategory-item:focus {
   outline: 3px solid #af002d;
   background-color: #fceaea;

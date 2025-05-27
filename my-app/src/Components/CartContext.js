@@ -7,11 +7,17 @@ export function CartProvider({ children }) {
 
   const addToCart = (product) => {
     const quantityToAdd = product.quantity ?? 1;
-    setCartItems(prev => {
-      const existing = prev.find(item => item.id === product.id);
+
+    setCartItems((prev) => {
+      const existing = prev.find(
+        (item) =>
+          item.id === product.id &&
+          JSON.stringify(item.selectedAttributes || {}) === JSON.stringify(product.selectedAttributes || {})
+      );
+
       if (existing) {
-        return prev.map(item =>
-          item.id === product.id
+        return prev.map((item) =>
+          item === existing
             ? { ...item, quantity: item.quantity + quantityToAdd }
             : item
         );
@@ -21,16 +27,25 @@ export function CartProvider({ children }) {
     });
   };
 
-  const updateQty = (id, newQty) => {
-    setCartItems(prev =>
-      prev.map(item =>
-        item.id === id ? { ...item, quantity: newQty > 0 ? newQty : 1 } : item
+  const updateQty = (id, newQty, selectedAttributes = {}) => {
+    setCartItems((prev) =>
+      prev.map((item) =>
+        item.id === id &&
+        JSON.stringify(item.selectedAttributes || {}) === JSON.stringify(selectedAttributes)
+          ? { ...item, quantity: newQty > 0 ? newQty : 1 }
+          : item
       )
     );
   };
 
-  const removeFromCart = (id) => {
-    setCartItems(prev => prev.filter(item => item.id !== id));
+  const removeFromCart = (id, selectedAttributes = {}) => {
+    setCartItems((prev) =>
+      prev.filter(
+        (item) =>
+          !(item.id === id &&
+            JSON.stringify(item.selectedAttributes || {}) === JSON.stringify(selectedAttributes))
+      )
+    );
   };
 
   return (

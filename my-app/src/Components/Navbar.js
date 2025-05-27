@@ -81,19 +81,17 @@ const Navbar = () => {
     <>
       <header className="navbar">
         <div className="navbar-top">
-          <div className="navbar-logo">
-            <img src={logo} alt="Luxury Trends Logo" />
-            <div className="logo-text">Luxury Trends Ke</div>
-          </div>
+         <Link to="/" className="navbar-logo">
+  <img src={logo} alt="Luxury Trends Logo" />
+  <div className="logo-text">Luxury Trends Ke</div>
+</Link>
 
           <div className="navbar-search">
             <select aria-label="Search category">
               <option value="all">All</option>
             </select>
             <input type="search" placeholder="Search for collections" aria-label="Search input" />
-            <button className="mic-btn" aria-label="Voice search">
-              <FaMicrophone />
-            </button>
+           
           </div>
 
           <div className="navbar-icons">

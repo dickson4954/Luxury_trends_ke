@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './ProductDetails.css';
-import { FaShoppingBag, FaArrowLeft } from 'react-icons/fa';
+import { FaShoppingBag, FaArrowLeft, FaMoneyBillWave } from 'react-icons/fa';
 import productsData from '../Components/Products';
 import { useCart } from '../Components/CartContext';
 import Cart from '../Components/Cart';
@@ -23,6 +23,25 @@ export default function ProductDetails() {
   const handleAddToCart = () => {
     addToCart({ ...product, quantity: qty });
     setIsCartOpen(true);
+  };
+
+  const handlePayNow = () => {
+    const order = {
+      name: 'Guest',
+      phone: '',
+      location: '',
+      items: [{ ...product, quantity: qty }],
+      subtotal: product.price * qty,
+      shipping: 0, // Free delivery
+      total: product.price * qty,
+      discountCode: '',
+      subscribed: false,
+      paymentMethod: 'PayNow',
+    };
+
+    localStorage.setItem("latestOrder", JSON.stringify(order));
+    window.dispatchEvent(new Event("orderUpdated"));
+    navigate('/payment');
   };
 
   return (
@@ -73,8 +92,8 @@ export default function ProductDetails() {
             <button className="btn order-now" onClick={() => setShowOrderModal(true)}>
               <FaShoppingBag /> Order Now
             </button>
-            <button className="btn pay-online">
-              Pay Now & Get Free Delivery!
+            <button className="btn pay-online" onClick={handlePayNow}>
+              <FaMoneyBillWave /> Pay Now & Get Free Delivery!
             </button>
           </div>
         </div>

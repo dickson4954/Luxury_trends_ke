@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './CollectionDetail.css';
 
 import garden from '../Images/garden.jpg';
-import bedroom from '../Images/bedrooms.jpg';
+import bedroom from '../Images/Bedroom.jpeg';
 import kitchen from '../Images/kitchen.avif';
-import furniture from '../Images/furnituree.jpg';
+import furniture from '../Images/furniture.jpeg';
+
+import { useCart } from '../Components/CartContext';
+import Cart from '../Components/Cart';
+import OrderNowModal from '../Components/OrderNowModal'; // <-- Import the modal
 
 const collectionInfo = {
   garden: {
@@ -35,24 +39,41 @@ const collectionInfo = {
 };
 
 const allProducts = [
-  { id: 1, name: 'Garden Table', image: garden, price: 150, category: 'garden' },
-  { id: 2, name: 'Bed Frame', image: bedroom, price: 300, category: 'bedroom' },
-  { id: 3, name: 'Cookware Set', image: kitchen, price: 90, category: 'kitchen' },
-  { id: 4, name: 'Wardrobe', image: furniture, price: 450, category: 'furniture' },
+  { id: 'p1', name: 'Garden Table', image: garden, price: 150, category: 'garden' },
+  { id: 'p2', name: 'Bed Frame', image: bedroom, price: 300, category: 'bedroom' },
+  { id: 'p3', name: 'Cookware Set', image: kitchen, price: 90, category: 'kitchen' },
+  { id: 'p4', name: 'Wardrobe', image: furniture, price: 450, category: 'furniture' },
 ];
 
 function CollectionDetail() {
   const { type } = useParams();
-  const collection = collectionInfo[type.toLowerCase()];
+  const { addToCart } = useCart();
+
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [modalProduct, setModalProduct] = useState(null); // Track which product to order in modal
+
+  const collection = collectionInfo[type?.toLowerCase()];
   const filteredProducts = allProducts.filter(
     (product) => product.category.toLowerCase() === type.toLowerCase()
   );
 
   if (!collection) return <p>Collection not found.</p>;
 
+  const handleAddToCart = (product) => {
+    addToCart({ ...product, quantity: 1 });
+    setIsCartOpen(true);
+  };
+
+  const handleOrderNow = (product) => {
+    setModalProduct({ ...product, quantity: 1 }); // Open modal with product
+  };
+
+  const closeModal = () => {
+    setModalProduct(null);
+  };
+
   return (
     <div className="collection-detail-page">
-     
       <div className="collection-hero">
         <div className="collection-hero-text">
           <h1>
@@ -68,16 +89,44 @@ function CollectionDetail() {
         />
       </div>
 
-      
       <div className="product-grid">
         {filteredProducts.map((product) => (
           <div key={product.id} className="product-card">
             <img src={product.image} alt={product.name} />
             <h3>{product.name}</h3>
             <p>Ksh {product.price}</p>
+
+            <div className="product-actions">
+              <button
+                className="btn-add-to-cart"
+                onClick={() => handleAddToCart(product)}
+                aria-label={`Add ${product.name} to cart`}
+              >
+                Add to Cart
+              </button>
+
+              <button
+                className="btn-order-now"
+                onClick={() => handleOrderNow(product)}
+                aria-label={`Order ${product.name} now`}
+              >
+                Order Now
+              </button>
+            </div>
           </div>
         ))}
       </div>
+
+      {isCartOpen && <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />}
+
+      {/* Order Now Modal */}
+      {modalProduct && (
+        <OrderNowModal
+          product={modalProduct}
+          quantity={modalProduct.quantity}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 }

@@ -26,12 +26,44 @@ const Cart = ({ isOpen, onClose }) => {
     .filter((p) => !cartItems.find((ci) => ci.id === p.id))
     .slice(0, 3);
 
+  const handleCheckout = () => {
+    const order = {
+      name: 'Guest',
+      phone: '',
+      location: '',
+      items: cartItems,
+      subtotal: totalAmount,
+      shipping: 0, // Free delivery
+      total: totalAmount,
+      discountCode: '',
+      subscribed: false,
+      paymentMethod: 'Checkout',
+    };
+
+    localStorage.setItem('latestOrder', JSON.stringify(order));
+    window.dispatchEvent(new Event('orderUpdated'));
+    onClose(); // close the cart panel
+    navigate('/payment');
+  };
+
+  // Safe image getter utility
+  const getImageSrc = (item) => {
+    if (item?.images && Array.isArray(item.images) && item.images.length > 0) {
+      return item.images[0];
+    }
+    if (item?.image) {
+      return item.image;
+    }
+    // fallback image or empty string
+    return '';
+  };
+
   return (
     <>
       <div className={`cart-panel ${isOpen ? 'open' : ''}`}>
         <div className="cart-header">
           <h2>Your cart</h2>
-          <a onClick={handleStartShopping} className="view-cart">
+          <a onClick={handleStartShopping} className="view-cart" tabIndex={0} role="button">
             View cart
           </a>
           <button className="close-btn" onClick={onClose} aria-label="Close cart">
@@ -58,7 +90,7 @@ const Cart = ({ isOpen, onClose }) => {
                 {cartItems.map((item) => (
                   <li key={item.id} className="cart-item">
                     <img
-                      src={item.images[0]}
+                      src={getImageSrc(item)}
                       alt={item.name}
                       className="cart-item-thumbnail"
                     />
@@ -78,16 +110,21 @@ const Cart = ({ isOpen, onClose }) => {
                           onClick={() =>
                             updateQty(item.id, Math.max(1, item.quantity - 1))
                           }
+                          aria-label={`Decrease quantity of ${item.name}`}
                         >
                           <FaMinus />
                         </button>
-                        <span>{item.quantity}</span>
-                        <button onClick={() => updateQty(item.id, item.quantity + 1)}>
+                        <span aria-live="polite" aria-atomic="true">{item.quantity}</span>
+                        <button
+                          onClick={() => updateQty(item.id, item.quantity + 1)}
+                          aria-label={`Increase quantity of ${item.name}`}
+                        >
                           <FaPlus />
                         </button>
                         <button
                           onClick={() => removeFromCart(item.id)}
                           className="delete-btn"
+                          aria-label={`Remove ${item.name} from cart`}
                         >
                           <FaTrash />
                         </button>
@@ -102,10 +139,13 @@ const Cart = ({ isOpen, onClose }) => {
                 <div className="suggested-list">
                   {suggestedProducts.map((p) => (
                     <div key={p.id} className="suggested-item">
-                      <img src={p.images[0]} alt={p.name} />
+                      <img src={getImageSrc(p)} alt={p.name} />
                       <p>{p.name}</p>
-                      <span>KSh{p.price}</span>
-                      <button onClick={() => addToCart({ ...p, quantity: 1 })}>
+                      <span>KSh{p.price.toLocaleString()}</span>
+                      <button
+                        onClick={() => addToCart({ ...p, quantity: 1 })}
+                        aria-label={`Add ${p.name} to cart`}
+                      >
                         Add
                       </button>
                     </div>
@@ -120,13 +160,24 @@ const Cart = ({ isOpen, onClose }) => {
                 </span>
               </div>
 
+              {/* Only open modal if cartItems exist and length > 0 */}
               <button
                 className="order-now-btn"
-                onClick={() => setIsOrderModalOpen(true)}
+                onClick={() => {
+                  if (cartItems.length > 0) {
+                    setIsOrderModalOpen(true);
+                  }
+                }}
+                aria-disabled={cartItems.length === 0}
               >
                 🛍️ Order Now
               </button>
-              <button className="checkout-btn">
+
+              <button
+                className="checkout-btn"
+                onClick={handleCheckout}
+                disabled={cartItems.length === 0}
+              >
                 🧾 Checkout - KSh{totalAmount.toLocaleString()}
               </button>
             </>
@@ -134,8 +185,8 @@ const Cart = ({ isOpen, onClose }) => {
         </div>
       </div>
 
-      {/* Modal rendered OUTSIDE cart-panel for centered overlay */}
-      {isOrderModalOpen && (
+      {/* Pass items only if cartItems has elements */}
+      {isOrderModalOpen && cartItems.length > 0 && (
         <OrderNowModal
           items={cartItems}
           onClose={() => setIsOrderModalOpen(false)}

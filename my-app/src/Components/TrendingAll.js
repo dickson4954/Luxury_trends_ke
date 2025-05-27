@@ -1,41 +1,67 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './TrendingAll.css';
+import { useCart } from '../Components/CartContext';
+import Cart from '../Components/Cart';
 
 const trendingItems = [
   {
-    title: 'Cool Mist Humidifier | 2.2L | For Office, Indoor Plants...',
-    image: require('../Images/tier.jpeg'),
-    price: 'KSh3,499.00',
+    id: 'p1',
+    name: 'Cool Mist Humidifier | 2.2L | For Office, Indoor Plants',
+    slug: 'cool-mist-humidifier',
+    description: 'Portable humidifier perfect for indoor use with 2.2L capacity and quiet operation.',
+    images: [require('../Images/tier.jpeg')],
+    price: 3499,
     onSale: true,
   },
   {
-    title: 'Kid Kitchen Toddler Wooden Pretend Cooking Set...',
-    image: require('../Images/wall.jpg'),
-    price: 'KSh3,499.00',
+    id: 'p2',
+    name: 'Kid Kitchen Toddler Wooden Pretend Cooking Set',
+    slug: 'wooden-kitchen-set',
+    description: 'Wooden kitchen toy set for kids, great for imaginative play and learning.',
+    images: [require('../Images/wall.jpg')],
+    price: 3499,
     onSale: true,
   },
   {
-    title: 'Bathroom wall mounted towel rack accessory with hooks',
-    image: require('../Images/cutlery.jpg'),
-    price: 'KSh3,499.00',
+    id: 'p3',
+    name: 'Bathroom Wall Mounted Towel Rack with Hooks',
+    slug: 'towel-rack-hooks',
+    description: 'Stylish and space-saving bathroom rack with multiple hooks for convenience.',
+    images: [require('../Images/cutlery.jpg')],
+    price: 3499,
     onSale: true,
   },
   {
-    title: 'Glass goblet, 370 ML Snifter Glasses | Set of 6',
-    image: require('../Images/layer.jpeg'),
-    price: 'KSh1,999.00',
-    oldPrice: 'KSh2,500.00',
+    id: 'p4',
+    name: 'Glass Goblet, 370ML Snifter Glasses | Set of 6',
+    slug: 'snifter-glasses-set',
+    description: 'Elegant glass goblets for wine or cocktails, comes in a set of 6.',
+    images: [require('../Images/layer.jpeg')],
+    price: 1999,
+    oldPrice: 2500,
     onSale: true,
   },
   {
-    title: 'Adjustable Tilting Laptop Folding Table Stand Desk...',
-    image: require('../Images/flameless.jpeg'),
-    price: 'KSh3,499.00',
+    id: 'p5',
+    name: 'Adjustable Tilting Laptop Folding Table Stand Desk',
+    slug: 'folding-laptop-stand',
+    description: 'Adjustable desk for laptops with foldable design, ideal for bed or couch use.',
+    images: [require('../Images/flameless.jpeg')],
+    price: 3499,
     onSale: true,
   },
 ];
 
 const TrendingAll = () => {
+  const { addToCart } = useCart();
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const handleAddToCart = (item) => {
+    // Add with quantity 1, uniquely identified by id
+    addToCart({ ...item, quantity: 1 });
+    setIsCartOpen(true);
+  };
+
   return (
     <section className="trending-all-page">
       <header>
@@ -43,33 +69,45 @@ const TrendingAll = () => {
       </header>
 
       <div className="products-grid">
-        {trendingItems.map((item, idx) => (
-          <article className="product-card" key={idx} tabIndex="0" aria-label={item.title}>
+        {trendingItems.map((item) => (
+          <article
+            className="product-card"
+            key={item.id}
+            tabIndex="0"
+            aria-label={item.name}
+          >
             {item.onSale && <span className="sale-badge">Sale</span>}
 
             <div className="image-wrapper">
               <img
-                src={item.image}
-                alt={item.title}
+                src={item.images[0]}
+                alt={item.name}
                 loading="lazy"
                 className="product-image"
               />
             </div>
 
-            <h3 className="product-title">{item.title}</h3>
+            <h3 className="product-title">{item.name}</h3>
 
             <p className="price">
-              <span className="current-price">{item.price}</span>
-              {item.oldPrice && <span className="old-price">{item.oldPrice}</span>}
+              <span className="current-price">KSh{item.price.toLocaleString()}</span>
+              {item.oldPrice && (
+                <span className="old-price">KSh{item.oldPrice.toLocaleString()}</span>
+              )}
             </p>
 
-         
-            <button className="btn-primary" aria-label={`Add ${item.title} to cart`}>
+            <button
+              className="btn-primary"
+              onClick={() => handleAddToCart(item)}
+              aria-label={`Add ${item.name} to cart`}
+            >
               Add to Cart
             </button>
           </article>
         ))}
       </div>
+
+      {isCartOpen && <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />}
     </section>
   );
 };

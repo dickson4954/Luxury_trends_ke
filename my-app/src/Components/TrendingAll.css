@@ -4,7 +4,7 @@
 .trending-all-page {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 100px 20px 50px; /* add enough top padding (e.g. 100px) to clear navbar */
+  padding: 150px 20px 40px; /* add enough top padding (e.g. 100px) to clear navbar */
   font-family: 'Open Sans', sans-serif;
   color: #222;
 }

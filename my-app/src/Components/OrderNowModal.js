@@ -12,6 +12,17 @@ export default function OrderNowModal({ product, quantity = 1, items = [], onClo
   const [discount, setDiscount] = useState('');
   const [subscribe, setSubscribe] = useState(false);
 
+  // Helper to safely get image src
+  const getImageSrc = (item) => {
+    if (item.images && Array.isArray(item.images) && item.images.length > 0) {
+      return item.images[0];
+    }
+    if (item.image) {
+      return item.image;
+    }
+    return ''; // fallback image or empty string
+  };
+
   const orderItems = items.length > 0
     ? items
     : product
@@ -48,26 +59,28 @@ export default function OrderNowModal({ product, quantity = 1, items = [], onClo
     };
 
     localStorage.setItem("latestOrder", JSON.stringify(order));
+    window.dispatchEvent(new Event("orderUpdated"));
     navigate("/payment");
   };
 
- const handlePayNow = () => {
-  const order = {
-    name: name || 'Guest',
-    phone: phone || '',
-    location: location || '',
-    items: orderItems,
-    subtotal,
-    shipping: 0, // Free delivery
-    total: subtotal,
-    discountCode: discount,
-    subscribed: subscribe,
-    paymentMethod: 'PayNow',
-  };
+  const handlePayNow = () => {
+    const order = {
+      name: name || 'Guest',
+      phone: phone || '',
+      location: location || '',
+      items: orderItems,
+      subtotal,
+      shipping: 0, // Free delivery
+      total: subtotal,
+      discountCode: discount,
+      subscribed: subscribe,
+      paymentMethod: 'PayNow',
+    };
 
-  localStorage.setItem("lathestOrder", JSON.stringify(order));
-  navigate("/payment");
-};
+    localStorage.setItem("latestOrder", JSON.stringify(order));
+    window.dispatchEvent(new Event("orderUpdated"));
+    navigate("/payment");
+  };
 
   return (
     <div className="order-modal-overlay" onClick={onClose}>
@@ -79,7 +92,7 @@ export default function OrderNowModal({ product, quantity = 1, items = [], onClo
         <div className="order-summary">
           {orderItems.map(item => (
             <div key={item.id} className="order-summary-item product-row">
-              <img src={item.images[0]} alt={item.name} className="order-img" />
+              <img src={getImageSrc(item)} alt={item.name} className="order-img" />
               <div className="product-details">
                 <strong>{item.name}</strong>
                 <p>KSh {item.price.toLocaleString()}</p>
