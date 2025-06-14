@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import "../Components/LoginPage.css"; // <-- Make sure this path is correct!
+import "../Components/LoginPage.css";
 
 const LoginPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     fullName: "",
     username: "",
+    username_or_email: "",
     email: "",
     password: "",
   });
@@ -18,6 +19,7 @@ const LoginPage = () => {
     setFormData({
       fullName: "",
       username: "",
+      username_or_email: "",
       email: "",
       password: "",
     });
@@ -29,19 +31,21 @@ const LoginPage = () => {
 
   const validateForm = () => {
     if (
-      !formData.username ||
-      !formData.password ||
-      (!isLogin && (!formData.fullName || !formData.email))
+      (isLogin && (!formData.username_or_email || !formData.password)) ||
+      (!isLogin &&
+        (!formData.fullName || !formData.username || !formData.email || !formData.password))
     ) {
       return "Please fill in all required fields.";
     }
+
     if (!isLogin && !/\S+@\S+\.\S+/.test(formData.email)) {
       return "Invalid email address.";
     }
+
     return "";
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage(null);
 
@@ -53,14 +57,43 @@ const LoginPage = () => {
 
     setLoading(true);
 
-    setTimeout(() => {
-      setLoading(false);
-      if (isLogin) {
-        setMessage({ type: "success", text: "Login successful! (Simulated)" });
+    const endpoint = isLogin ? "/login" : "/register";
+    const payload = isLogin
+      ? {
+          username: formData.username_or_email,
+          password: formData.password,
+        }
+      : {
+          full_name: formData.fullName,
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+        };
+
+    try {
+      const res = await fetch(`http://127.0.0.1:5000${endpoint}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem("token", data.token); 
+        setMessage({ type: "success", text: data.message || "Success!" });
+
+      
       } else {
-        setMessage({ type: "success", text: "Registration successful! (Simulated)" });
+        setMessage({ type: "error", text: data.message || "Something went wrong." });
       }
-    }, 1500);
+    } catch (err) {
+      setMessage({ type: "error", text: "Network error. Please try again." });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -75,33 +108,45 @@ const LoginPage = () => {
             {message && <div className={`message ${message.type}`}>{message.text}</div>}
 
             {!isLogin && (
+              <>
+                <input
+                  type="text"
+                  placeholder="Full Name *"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleInputChange}
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Username *"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleInputChange}
+                  required
+                />
+                <input
+                  type="email"
+                  placeholder="Email *"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                />
+              </>
+            )}
+
+            {isLogin && (
               <input
                 type="text"
-                placeholder="Full Name *"
-                name="fullName"
-                value={formData.fullName}
+                placeholder="Username or Email *"
+                name="username_or_email"
+                value={formData.username_or_email}
                 onChange={handleInputChange}
                 required
               />
             )}
-            <input
-              type="text"
-              placeholder={isLogin ? "Username or Email *" : "Username *"}
-              name="username"
-              value={formData.username}
-              onChange={handleInputChange}
-              required
-            />
-            {!isLogin && (
-              <input
-                type="email"
-                placeholder="Email *"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-              />
-            )}
+
             <input
               type="password"
               placeholder="Password *"
@@ -110,6 +155,7 @@ const LoginPage = () => {
               onChange={handleInputChange}
               required
             />
+
             <button type="submit" disabled={loading}>
               {loading ? "Processing..." : isLogin ? "Login" : "Create Account"}
             </button>
@@ -128,5 +174,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
-
