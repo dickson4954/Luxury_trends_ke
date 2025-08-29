@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './DecorativeAccessories.css';
 
-import homeAccessoriesImg from '../Images/homee.jpg';
-import bedroomImg from '../Images/Bedroom.jpeg';
-import kidsImg from '../Images/storage.jpg';
-import kitchenImg from '../Images/home.webp';
+import homeAccessoriesImg from '../Images/outdoor1.webp';
+import bedroomImg from '../Images/Layer_1.webp';
+import kidsImg from '../Images/layer3.png';
+import kitchenImg from '../Images/layer4.webp';
 
 const decorativeCategories = [
   {

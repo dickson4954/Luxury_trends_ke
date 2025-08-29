@@ -1,49 +1,45 @@
 import React from 'react';
 import './DiscoverMore.css';
 
-import homeAccessoriesImg from '../Images/homee.jpg';
-import bedroomImg from '../Images/Bedroom.jpeg';
-import kidsImg from '../Images/storage.jpg';
-import kitchenImg from '../Images/home.webp';
+import homeAccessoriesImg from '../Images/table-lamp.webp';
+import bedroomImg from '../Images/switches.webp';
+import kidsImg from '../Images/out-door.webp';
+import kitchenImg from '../Images/bathroom-lights.webp';
 
 const discoverCategories = [
   {
-    title: 'Home Accessories',
+    title: 'Table Lamp',
     image: homeAccessoriesImg,
     items: [
-      { name: 'Mirrors', link: '#' },
-      { name: 'Wall Clocks', link: '#' },
-      { name: 'Vases', link: '#' },
+      { name: 'LED Desk Lamp', link: '#' },
+      { name: 'Rechargeable Table Light', link: '#' },
     ],
     shopLink: '#',
   },
   {
-    title: 'Bedroom',
+    title: 'Switches',
     image: bedroomImg,
     items: [
-      { name: 'Bedsheets', link: '#' },
-      { name: 'Duvet Covers', link: '#' },
-      { name: 'Closet Organizers', link: '#' },
+      { name: 'Smart Touch Switches', link: '#' },
+      { name: 'Classic Wall Switches', link: '#' },
     ],
     shopLink: '#',
   },
   {
-    title: 'Kids',
+    title: 'Outdoor Lights',
     image: kidsImg,
     items: [
-      { name: 'Toys & Games', link: '#' },
-      { name: 'Kids Tablets', link: '#' },
-      { name: 'Kids Games', link: '#' },
+      { name: 'Flood Lights', link: '#' },
+      { name: 'Solar Garden Lamps', link: '#' },
     ],
     shopLink: '#',
   },
   {
-    title: 'Kitchen',
+    title: 'Bathroom Lights',
     image: kitchenImg,
     items: [
-      { name: 'Cookware', link: '#' },
-      { name: 'Food Storage', link: '#' },
-      { name: 'Kitchen Essentials', link: '#' },
+      { name: 'Vanity Mirror Lights', link: '#' },
+      { name: 'Waterproof Ceiling Lights', link: '#' },
     ],
     shopLink: '#',
   },
@@ -56,13 +52,19 @@ const DiscoverMore = () => {
       <div className="discover-grid">
         {discoverCategories.map((category, index) => (
           <div className="discover-card" key={index}>
-            <img src={category.image} alt={category.title} className="discover-image" />
+            <img
+              src={category.image}
+              alt={category.title}
+              className="discover-image"
+            />
             <div className="discover-content">
               <h3 className="discover-title">{category.title}</h3>
               <ul>
                 {category.items.map((item, idx) => (
                   <li key={idx}>
-                    <a href={item.link} className="discover-link">{item.name}</a>
+                    <a href={item.link} className="discover-link">
+                      {item.name}
+                    </a>
                   </li>
                 ))}
               </ul>

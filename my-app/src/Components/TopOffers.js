@@ -1,9 +1,11 @@
 import React from "react";
 import "./TopOffers.css";
-import offer1 from "../Images/fridge.webp";
-import offer2 from "../Images/pantry.jpg";
-import offer3 from "../Images/sleeping.png";
-import offer4 from "../Images/shop.jpg";
+import offer1Video from "../Images/sleeping.mp4";
+import offer2Video from "../Images/pantry.mp4";
+import offer3Video from "../Images/sleeping.mp4";
+import offer4Video from "../Images/shop.mp4";
+
+// ...imports
 
 const TopOffers = () => {
   return (
@@ -15,14 +17,17 @@ const TopOffers = () => {
       <div className="top-offers-grid">
         <div className="offer-large">
           <div className="offer-img-wrapper">
-            <img src={offer1} alt="Fridge" className="offer-img" />
+            <video
+              src={offer1Video}
+              className="offer-img"
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
             <div className="offer-badge red-circle">
               Save up to<br />50%
             </div>
-          </div>
-          <div className="offer-caption">
-            <h4>Kitchen Essentials</h4>
-            <p>Shop Your Favourite</p>
           </div>
         </div>
 
@@ -30,37 +35,46 @@ const TopOffers = () => {
           <div className="offer-top-row">
             <div className="offer-card small">
               <div className="offer-img-wrapper">
-                <img src={offer2} alt="Pantry" className="offer-img" />
+                <video
+                  src={offer2Video}
+                  className="offer-img"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                />
                 <div className="offer-badge rectangle">Save<br />50%</div>
-              </div>
-              <div className="offer-caption">
-                <h4>Pantry Offers</h4>
-                <p>Shop Your Favourite</p>
               </div>
             </div>
 
             <div className="offer-card small">
               <div className="offer-img-wrapper">
-                <img src={offer3} alt="Sleeping" className="offer-img" />
+                <video
+                  src={offer3Video}
+                  className="offer-img"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                />
                 <div className="offer-badge rectangle">Save<br />50%</div>
-              </div>
-              <div className="offer-caption">
-                <h4>Sleeping Offers</h4>
-                <p>Shop Your Favourite</p>
               </div>
             </div>
           </div>
 
           <div className="offer-card wide">
             <div className="offer-img-wrapper">
-              <img src={offer4} alt="Bed Linen" className="offer-img" />
+              <video
+                src={offer4Video}
+                className="offer-img"
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
               <div className="offer-badge rectangle">
                 Offers on<br /><strong>Bed Linen</strong>
               </div>
-            </div>
-            <div className="offer-caption">
-              <h4>Bed Linen Offers</h4>
-              <p>Shop Your Favourite</p>
             </div>
           </div>
         </div>

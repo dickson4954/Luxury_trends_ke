@@ -2,12 +2,12 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './TrendingNow.css';
 
-import humidifier from '../Images/tier.jpeg';
-import kitchenToy from '../Images/wall.jpg';
-import towelRack from '../Images/cutlery.jpg';
-import glassSet from '../Images/layer.jpeg';
-import laptopTable from '../Images/flameless.jpeg';
-import inspirationImage from '../Images/piration.jpg'; 
+import humidifier from '../Images/PL.webp';
+import kitchenToy from '../Images/PL-2.webp';
+import towelRack from '../Images/PL-3.webp';
+import glassSet from '../Images/PL-4.webp';
+import laptopTable from '../Images/PL.webp';
+import inspirationImage from '../Images/garden 4.webp'; 
 
 const trendingItems = [
   {

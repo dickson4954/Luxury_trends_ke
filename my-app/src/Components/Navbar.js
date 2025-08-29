@@ -2,32 +2,31 @@ import React, { useState } from 'react';
 import './Navbar.css';
 import { FaMicrophone, FaChevronDown } from 'react-icons/fa';
 import Cart from '../Components/Cart';
-
 import { Link } from 'react-router-dom';
-import logo from '../Images/luxury_trends.jpg';
+import logo from '../Images/ituriu.logo.jpg';
 
-// Category Images
+// Electrical category images (retaining original imports)
 import homeDecorImg from '../Images/appliances.jpeg';
 import kitchenDiningImg from '../Images/Bedroom.jpeg';
 import bedBathImg from '../Images/bedrooms.jpg';
 import furnitureImg from '../Images/cutlery.jpg';
 import storageImg from '../Images/flameless.jpeg';
 
-// Shop By Room Images
+// Shop By Room images
 import livingRoomImg from '../Images/cutlery.jpg';
 import bedroomImg from '../Images/home.webp';
 import kitchenRoomImg from '../Images/furnituree.jpg';
 import bathroomImg from '../Images/furniture.jpeg';
 import outdoorImg from '../Images/fridge.webp';
 
-// Gifts Images
+// Gifts images
 import birthdayGiftImg from '../Images/kitchen.avif';
 import weddingGiftImg from '../Images/layer.jpeg';
 import housewarmingGiftImg from '../Images/pantry.jpg';
 import anniversaryGiftImg from '../Images/piration.jpg';
 import corporateGiftImg from '../Images/homee.jpg';
 
-// Sale & Offers Images
+// Sale & Offers images
 import clearanceImg from '../Images/shop.jpg';
 import discountDealImg from '../Images/garden.jpg';
 import limitedOfferImg from '../Images/storage.jpg';
@@ -38,23 +37,47 @@ import LoginPage from '../Components/LoginPage';
 
 const menuItems = [
   {
-    title: 'Categories',
-    subcategories: ['Home Decor', 'Kitchen & Dining', 'Bed & Bath', 'Furniture', 'Storage & Organization'],
+    title: 'Products',
+    subcategories: [
+      'Lighting Solutions',
+      'Wiring & Cables',
+      'Circuit Protection',
+      'Power Distribution',
+      'Tools & Equipment'
+    ],
     images: [homeDecorImg, kitchenDiningImg, bedBathImg, furnitureImg, storageImg],
   },
   {
-    title: 'Shop By Room',
-    subcategories: ['Living Room', 'Bedroom', 'Kitchen', 'Bathroom', 'Outdoor'],
+    title: 'Shop By Area',
+    subcategories: [
+      'Residential Solutions',
+      'Commercial Installations',
+      'Industrial Systems',
+      'Outdoor Lighting',
+      'Smart Home Tech'
+    ],
     images: [livingRoomImg, bedroomImg, kitchenRoomImg, bathroomImg, outdoorImg],
   },
   {
-    title: 'Gifts',
-    subcategories: ['Birthday Gifts', 'Wedding Gifts', 'Housewarming Gifts', 'Anniversary Gifts', 'Corporate Gifts'],
+    title: 'Services',
+    subcategories: [
+      'Electrical Installations',
+      'Maintenance & Repairs',
+      'Safety Inspections',
+      'Energy Audits',
+      'Emergency Services'
+    ],
     images: [birthdayGiftImg, weddingGiftImg, housewarmingGiftImg, anniversaryGiftImg, corporateGiftImg],
   },
   {
-    title: 'Sale & Offers',
-    subcategories: ['Clearance', 'Discount Deals', 'Limited Offers', 'Flash Sales', 'Holiday Specials'],
+    title: 'Deals',
+    subcategories: [
+      'Clearance Items',
+      'Bundle Offers',
+      'Seasonal Promotions',
+      'Trade Discounts',
+      'New Product Launches'
+    ],
     images: [clearanceImg, discountDealImg, limitedOfferImg, flashSaleImg, holidaySpecialImg],
   },
 ];
@@ -81,17 +104,22 @@ const Navbar = () => {
     <>
       <header className="navbar">
         <div className="navbar-top">
-         <Link to="/" className="navbar-logo">
-  <img src={logo} alt="Luxury Trends Logo" />
-  <div className="logo-text">Luxury Trends Ke</div>
-</Link>
+          <Link to="/" className="navbar-logo">
+            <img src={logo} alt="Ituriu Electricals Logo" />
+            <div className="logo-text">Ituriu Electricals</div>
+          </Link>
 
           <div className="navbar-search">
             <select aria-label="Search category">
-              <option value="all">All</option>
+              <option value="all">All Categories</option>
+              <option value="lighting">Lighting</option>
+              <option value="wiring">Wiring</option>
+              <option value="tools">Tools</option>
             </select>
-            <input type="search" placeholder="Search for collections" aria-label="Search input" />
-           
+            <input type="search" placeholder="Search electrical products..." aria-label="Search input" />
+            <button className="mic-btn" aria-label="Voice search">
+              <FaMicrophone />
+            </button>
           </div>
 
           <div className="navbar-icons">
@@ -185,7 +213,7 @@ const Navbar = () => {
               </li>
             ))}
             <li>
-              <Link to="/contact">Contact</Link>
+              <Link to="/contact">Contact Us</Link>
             </li>
           </ul>
         </nav>

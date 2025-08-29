@@ -7,11 +7,11 @@ function PromoMarquee() {
       <hr className="promo-line" />
       <div className="promo-marquee">
         <div className="promo-track">
-          <span>🔥 Explore Fresh and Modern Home Decor Trends!</span>
-          <button className="black-btn">New Arrivals</button>
-          <span>⭐ New Arrivals</span>
-          <span>✨ Uncover the Latest Styles in Home Decor!</span>
-          <span>💡 Style Inspiration</span>
+          <span>⚡ Power Up with the Latest Electrical Innovations!</span>
+          <button className="black-btn">Shop Now</button>
+          <span>🔌 Energy-Efficient Solutions</span>
+          <span>💡 Bright Ideas for Every Space</span>
+          <span>🛠️ Reliable Electrical Tools & Accessories</span>
         </div>
       </div>
     </div>

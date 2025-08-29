@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './ContactPage.css';
-import bgImage from '../Images/luxury_trends.jpg';
+import bgImage from '../Images/ituriu.logo.jpg';
 import Footer from '../Components/Footer'; // Your footer import
 
 const ContactPage = () => {

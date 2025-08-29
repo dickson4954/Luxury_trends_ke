@@ -1,23 +1,23 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import './Collection.css'; 
-import garden from '../Images/garden.jpg';
-import storage from '../Images/storage.jpg';
-import kitchen from '../Images/kitchen.avif';
-import appliances from '../Images/appliances.jpeg';
-import bedroom from '../Images/Bedroom.jpeg';
-import furniture from '../Images/furniture.jpeg';
-import travel from '../Images/travel.jpeg';
+import garden from '../Images/cables.webp';
+import storage from '../Images/fans.webp';
+import kitchen from '../Images/garden1.webp';
+import appliances from '../Images/adaptor.webp';
+import bedroom from '../Images/gate.webp';
+import furniture from '../Images/chandalier.webp';
+import travel from '../Images/solar.webp';
 import PromoMarquee from './PromoMarquee'; 
 
 const collections = [
-    { name: "Garden & Outdoor", image: garden, path: "/collections/garden" },
-    { name: "Storage & Organization", image: storage, path: "/collections/storage" },
-    { name: "Kitchen", image: kitchen, path: "/collections/kitchen" },
-    { name: "Appliances", image: appliances, path: "/collections/appliances" },
-    { name: "Bedroom", image: bedroom, path: "/collections/bedroom" },
-    { name: "Furniture", image: furniture, path: "/collections/furniture" },
-    { name: "Travel", image: travel, path: "/collections/travel" }
+    { name: "Cables", image: garden, path: "/collections/garden" },
+    { name: "Fans $ Accesories", image: storage, path: "/collections/storage" },
+    { name: "Garden Lights", image: kitchen, path: "/collections/kitchen" },
+    { name: "Adaptors $ Extensions", image: appliances, path: "/collections/appliances" },
+    { name: "Gate Lights", image: bedroom, path: "/collections/bedroom" },
+    { name: "Luxury Chandelier Light", image: furniture, path: "/collections/furniture" },
+    { name: "Solar Light", image: travel, path: "/collections/travel" }
 ];
 
 function Collections() {

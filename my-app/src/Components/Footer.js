@@ -10,12 +10,12 @@ const Footer = () => {
        
         <div className="footer-section">
           <h3>Luxury_trends_ke</h3>
-          <p><strong>Luxury_trends_ke Kenya</strong></p>
+          <p><strong>Ituriu_Electricals_ke Kenya</strong></p>
           <p><FaMapMarkerAlt /> Nairobi CBD, Ronald Ngala Street, Interfina Building 2nd Floor.<br />Call/WhatsApp</p>
           <p><FaPhoneAlt /> 0725 260 473</p>
           <p><FaPhoneAlt /> 0102 605 919</p>
-          <p><MdEmail /> sales@luxury_trend_ke.com</p>
-          <p><FaGlobe /> www.luxury_trends_ke.com</p>
+          <p><MdEmail /> sales@Ituriu_Electricals_ke.com</p>
+          <p><FaGlobe /> www.Ituriu_Electricals_ke.com</p>
           <div className="footer-socials">
             <FaFacebookF />
             <FaInstagram />
