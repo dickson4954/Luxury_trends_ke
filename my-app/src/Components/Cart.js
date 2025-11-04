@@ -95,7 +95,7 @@ const Cart = ({ isOpen, onClose }) => {
                       className="cart-item-thumbnail"
                     />
                     <div className="cart-item-details">
-                      <p className="brand-name">Luxury_trends_ke</p>
+                      <p className="brand-name">Ituriu_Electricals</p>
                       <h4 className="item-name">{item.name}</h4>
                       <div className="price-section">
                         <span className="current-price">

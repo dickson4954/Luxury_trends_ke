@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="footer-container">
        
         <div className="footer-section">
-          <h3>Luxury_trends_ke</h3>
+          <h3>Ituriu_Electricals_ke</h3>
           <p><strong>Ituriu_Electricals_ke Kenya</strong></p>
           <p><FaMapMarkerAlt /> Nairobi CBD, Ronald Ngala Street, Interfina Building 2nd Floor.<br />Call/WhatsApp</p>
           <p><FaPhoneAlt /> 0725 260 473</p>

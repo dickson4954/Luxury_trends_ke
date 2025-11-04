@@ -8,24 +8,24 @@ import kitchenImg from '../Images/layer4.webp';
 
 const decorativeCategories = [
   {
-    title: 'Home Accessories',
+    title: 'Decorative Lighting',
     image: homeAccessoriesImg,
-    description: 'Add elegance with stylish accents.',
+    description: 'Elegant lamps and artistic light fixtures.',
   },
   {
-    title: 'Bedroom',
+    title: 'Smart Home Decor',
     image: bedroomImg,
-    description: 'Cozy, restful, and luxurious.',
+    description: 'Tech-integrated decorative solutions.',
   },
   {
-    title: 'Kids',
+    title: 'LED Art & Signs',
     image: kidsImg,
-    description: 'Fun & safe accessories.',
+    description: 'Illuminated wall art and decorative signs.',
   },
   {
-    title: 'Kitchen',
+    title: 'Modern Switch Plates',
     image: kitchenImg,
-    description: 'Essentials for every cook.',
+    description: 'Stylish electrical outlet covers.',
   },
 ];
 
@@ -38,7 +38,7 @@ const DecorativeAccessories = () => {
 
   return (
     <div className="decorative-accessories">
-      <h2 className="decorative-heading">Explore Decorative Accessories</h2>
+      <h2 className="decorative-heading">Explore Electrical Decor</h2>
       <div className="main-image-container">
         {/* Main Image */}
         <div className="main-image">

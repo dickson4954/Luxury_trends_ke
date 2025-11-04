@@ -1,46 +1,271 @@
-
-import kitchen1 from '../Images/kitchen.avif';
-import garden1  from '../Images/garden.jpg';
-import appliances1 from '../Images/appliances.jpeg';
-import bedroom1 from '../Images/Bedroom.jpeg';
+import cables from '../Images/cables.webp';
+import fans from '../Images/fans.webp';
+import gardenLights from '../Images/garden1.webp';
+import adaptors from '../Images/adaptor.webp';
+import gateLights from '../Images/gate.webp';
+import chandeliers from '../Images/chandalier.webp';
+import solar from '../Images/solar.webp';
 
 const products = [
   {
     id: 1,
-    slug: 'appliances',
-    name: 'Appliances',
-    description: 'Top‑quality appliances to make your home run smoothly.',
-    images: [appliances1, appliances1],  // add distinct second images if you have them
+    slug: 'power-cables',
+    name: 'Power Cables',
+    description: 'High-quality power cables for all your electrical needs. Ideal for home and office use.',
+    images: [cables, cables],
     price: 1440,
     date: '2024-01-20',
+    category: 'cables',
   },
   {
     id: 2,
-    slug: 'bedroom-essentials',
-    name: 'Bedroom Essentials',
-    description: 'Cozy linens, pillows, and decor for a restful space.',
-    images: [bedroom1, bedroom1],
-    price: 2000,
-    date: '2024-04-10',
+    slug: 'ceiling-fans',
+    name: 'Ceiling Fans',
+    description: 'Stay cool with our range of energy-efficient ceiling fans for every room.',
+    images: [fans, fans],
+    price: 2500,
+    date: '2024-03-15',
+    category: 'fans',
   },
   {
     id: 3,
-    slug: 'garden-tools',
-    name: 'Garden Tools',
-    description: 'Durable, ergonomic tools for every gardening task.',
-    images: [garden1, garden1],
+    slug: 'garden-lights',
+    name: 'Garden Lights',
+    description: 'Illuminate your outdoor space with our stylish and durable garden lights.',
+    images: [gardenLights, gardenLights],
     price: 1200,
     date: '2023-11-01',
+    category: 'outdoor-lights',
   },
   {
     id: 4,
-    slug: 'kitchenware',
-    name: 'Kitchenware',
-    description: 'Premium kitchenware for chefs and home cooks alike.',
-    images: [kitchen1, kitchen1],
-    price: 1800,
-    date: '2024-05-15',
+    slug: 'extension-cords',
+    name: 'Extension Cords',
+    description: 'Reliable extension cords for added convenience in your home or office.',
+    images: [adaptors, adaptors],
+    price: 600,
+    date: '2024-05-10',
+    category: 'adaptors',
+  },
+  {
+    id: 5,
+    slug: 'led-gate-lights',
+    name: 'LED Gate Lights',
+    description: 'Brighten up your driveway with these energy-efficient LED gate lights.',
+    images: [gateLights, gateLights],
+    price: 1500,
+    date: '2024-02-25',
+    category: 'outdoor-lights',
+  },
+  {
+    id: 6,
+    slug: 'chandelier-lights',
+    name: 'Luxury Chandelier Lights',
+    description: 'Elegantly designed chandelier lights that add a touch of luxury to your home.',
+    images: [chandeliers, chandeliers],
+    price: 5000,
+    date: '2024-06-01',
+    category: 'decorative-lighting',
+  },
+  {
+    id: 7,
+    slug: 'solar-powered-lights',
+    name: 'Solar Powered Lights',
+    description: 'Eco-friendly solar lights for outdoor use that save energy and enhance security.',
+    images: [solar, solar],
+    price: 1000,
+    date: '2023-10-15',
+    category: 'solar-lights',
+  },
+  // Add more products to fill out categories
+  {
+    id: 8,
+    slug: 'table-lamp-modern',
+    name: 'Modern Table Lamp',
+    description: 'Contemporary table lamp with adjustable brightness for reading and ambiance.',
+    images: [adaptors, adaptors],
+    price: 3499,
+    date: '2024-01-15',
+    category: 'table-lamps',
+  },
+  {
+    id: 9,
+    slug: 'rechargeable-table-light',
+    name: 'Rechargeable Table Light',
+    description: 'Portable rechargeable table light with wireless charging capability.',
+    images: [gardenLights, gardenLights],
+    price: 2999,
+    date: '2024-01-20',
+    category: 'table-lamps',
+  },
+  {
+    id: 10,
+    slug: 'smart-touch-switch',
+    name: 'Smart Touch Switch',
+    description: 'Modern smart touch switch with LED indicator and smooth operation.',
+    images: [fans, fans],
+    price: 1899,
+    date: '2024-01-10',
+    category: 'switches',
+  },
+  {
+    id: 11,
+    slug: 'classic-wall-switch',
+    name: 'Classic Wall Switch',
+    description: 'Traditional wall switch with durable construction and reliable performance.',
+    images: [cables, cables],
+    price: 899,
+    date: '2024-01-05',
+    category: 'switches',
+  },
+  {
+    id: 12,
+    slug: 'solar-flood-light',
+    name: 'Solar Flood Light',
+    description: 'Powerful solar-powered flood light for outdoor security and area lighting.',
+    images: [solar, solar],
+    price: 5999,
+    date: '2024-01-25',
+    category: 'outdoor-lights',
+  },
+  {
+    id: 13,
+    slug: 'garden-solar-lamp',
+    name: 'Garden Solar Lamp',
+    description: 'Decorative solar garden lamp perfect for pathways and landscape lighting.',
+    images: [gardenLights, gardenLights],
+    price: 2499,
+    date: '2024-01-18',
+    category: 'outdoor-lights',
+  },
+  {
+    id: 14,
+    slug: 'vanity-mirror-light',
+    name: 'Vanity Mirror Light',
+    description: 'LED vanity mirror light with dimmable features for perfect grooming lighting.',
+    images: [chandeliers, chandeliers],
+    price: 4599,
+    date: '2024-01-22',
+    category: 'bathroom-lights',
+  },
+  {
+    id: 15,
+    slug: 'waterproof-ceiling-light',
+    name: 'Waterproof Ceiling Light',
+    description: 'IP65 rated waterproof ceiling light designed specifically for bathroom safety.',
+    images: [gateLights, gateLights],
+    price: 3299,
+    date: '2024-01-12',
+    category: 'bathroom-lights',
+  },
+  // ADD THESE NEW PRODUCTS TO MATCH NAVBAR CATEGORIES
+  {
+    id: 16,
+    slug: 'led-downlights',
+    name: 'LED Downlights',
+    description: 'Energy-efficient LED downlights for modern ceiling lighting solutions.',
+    images: [solar, solar],
+    price: 1899,
+    date: '2024-01-30',
+    category: 'lighting',
+  },
+  {
+    id: 17,
+    slug: 'panel-lights',
+    name: 'LED Panel Lights',
+    description: 'Sleek LED panel lights for office and commercial lighting applications.',
+    images: [fans, fans],
+    price: 2999,
+    date: '2024-02-01',
+    category: 'lighting',
+  },
+  {
+    id: 18,
+    slug: 'circuit-breaker',
+    name: 'Circuit Breaker',
+    description: 'Safety circuit breaker for electrical circuit protection and overload prevention.',
+    images: [cables, cables],
+    price: 2200,
+    date: '2024-01-28',
+    category: 'circuit-protection',
+  },
+  {
+    id: 19,
+    slug: 'power-distribution-box',
+    name: 'Power Distribution Box',
+    description: 'Organized power distribution box for electrical panel management.',
+    images: [adaptors, adaptors],
+    price: 4500,
+    date: '2024-02-05',
+    category: 'power-distribution',
+  },
+  {
+    id: 20,
+    slug: 'electrician-toolkit',
+    name: 'Electrician Toolkit',
+    description: 'Complete toolkit with essential tools for electrical work and repairs.',
+    images: [gateLights, gateLights],
+    price: 6800,
+    date: '2024-02-10',
+    category: 'tools',
   },
 ];
+
+// Category descriptions for the header - ADD THE NEW CATEGORIES
+export const categoryInfo = {
+  'table-lamps': {
+    title: 'Table Lamps',
+    description: 'Discover elegant table lamps at Ituriu Electricals. Modern, classic, and energy-efficient lighting solutions for your home and office. Same day delivery available in Nairobi.',
+  },
+  'switches': {
+    title: 'Switches',
+    description: 'Explore our premium electrical switches at Ituriu Electricals. Smart touch, classic, and modern switches with durable construction and safety features. Professional installation available.',
+  },
+  'outdoor-lights': {
+    title: 'Outdoor Lights',
+    description: 'Illuminate your outdoor spaces with our weather-resistant lighting solutions. Solar-powered and LED outdoor lights for gardens, pathways, and security. Weatherproof and energy-efficient designs.',
+  },
+  'bathroom-lights': {
+    title: 'Bathroom Lights',
+    description: 'Find the perfect bathroom lighting at Ituriu Electricals. Waterproof, energy-efficient, and stylish lights designed for bathroom safety and ambiance. IP65 rated for complete protection.',
+  },
+  'cables': {
+    title: 'Power Cables',
+    description: 'High-quality power cables and wiring solutions at Ituriu Electricals. Durable, safe, and reliable cables for all your electrical installations. Certified for maximum safety standards.',
+  },
+  'fans': {
+    title: 'Ceiling Fans',
+    description: 'Stay cool with our energy-efficient ceiling fans at Ituriu Electricals. Quiet operation, modern designs, and reliable performance for every room in your home or office.',
+  },
+  'adaptors': {
+    title: 'Extension Cords & Adaptors',
+    description: 'Reliable extension cords and adaptors for added convenience at Ituriu Electricals. Surge-protected and durable solutions for home and office electrical needs.',
+  },
+  'decorative-lighting': {
+    title: 'Decorative Lighting',
+    description: 'Enhance your space with our decorative lighting collection at Ituriu Electricals. Chandeliers, pendant lights, and artistic fixtures to create the perfect ambiance.',
+  },
+  'solar-lights': {
+    title: 'Solar Lights',
+    description: 'Go green with our solar lighting solutions at Ituriu Electricals. Eco-friendly, energy-saving solar lights for outdoor and security applications. Easy installation and maintenance.',
+  },
+  // ADD THESE NEW CATEGORIES TO MATCH NAVBAR
+  'lighting': {
+    title: 'Lighting Solutions',
+    description: 'Comprehensive lighting solutions including LED lights, downlights, panel lights, and energy-efficient lighting for all applications.',
+  },
+  'circuit-protection': {
+    title: 'Circuit Protection',
+    description: 'Reliable circuit protection devices including breakers, fuses, and safety switches for electrical system protection.',
+  },
+  'power-distribution': {
+    title: 'Power Distribution',
+    description: 'Efficient power distribution units, electrical panels, and management systems for organized electricity distribution.',
+  },
+  'tools': {
+    title: 'Tools & Equipment',
+    description: 'Professional electrical tools and equipment for installations, maintenance, repairs, and electrical work.',
+  },
+};
 
 export default products;

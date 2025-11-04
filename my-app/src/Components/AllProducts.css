@@ -1,7 +1,7 @@
 .all-products-page {
-  padding: 140px;
+  padding: 40px 20px;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 180px auto 0 auto; /* Added top margin for fixed navbar */
 }
 
 .page-title {
@@ -80,9 +80,9 @@
 }
 
 .products-grid.grid .product-card {
-  aspect-ratio: 1 / 1; /* square card */
+  aspect-ratio: 1 / 1.2; /* Slightly taller for better proportions */
   text-align: center;
-  justify-content: center;
+  justify-content: flex-start; /* Changed from center */
 }
 
 .products-grid.list .product-card {
@@ -90,6 +90,14 @@
   padding: 1rem;
   align-items: center;
   gap: 1rem;
+  height: auto; /* Remove fixed height for list view */
+}
+
+.product-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  flex-shrink: 0; /* Prevent image wrapper from shrinking */
 }
 
 .product-image {
@@ -108,6 +116,9 @@
 .product-info {
   padding: 1rem;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .price {
@@ -152,11 +163,6 @@
 .order-now {
   background-color: #0088ff;
   color: white;
-}
-.product-image-wrapper {
-  position: relative;
-  overflow: hidden;
-  border-radius: 8px;
 }
 
 .hover-buttons {
@@ -217,8 +223,8 @@
 }
 
 .products-grid.grid .product-card {
-  width: 250px;
-  margin-bottom: 20px;
+  width: 100%; /* Changed from fixed 250px to responsive */
+  margin-bottom: 0; /* Remove bottom margin since gap handles spacing */
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   overflow: hidden;
@@ -228,7 +234,7 @@
   display: flex;
   gap: 20px;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 0; /* Remove bottom margin since gap handles spacing */
   padding: 10px;
   border-radius: 10px;
   background-color: #f8f9fa;
@@ -267,4 +273,43 @@
 
 .arrow {
   margin-left: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .all-products-page {
+    margin-top: 160px;
+    padding: 20px 15px;
+  }
+  
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .products-grid.grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  
+  .products-grid.list .product-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .products-grid.list .product-image-wrapper {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .all-products-page {
+    margin-top: 150px;
+    padding: 15px 10px;
+  }
+  
+  .products-grid.grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
 }

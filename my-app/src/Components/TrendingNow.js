@@ -2,43 +2,43 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './TrendingNow.css';
 
-import humidifier from '../Images/PL.webp';
-import kitchenToy from '../Images/PL-2.webp';
-import towelRack from '../Images/PL-3.webp';
-import glassSet from '../Images/PL-4.webp';
-import laptopTable from '../Images/PL.webp';
-import inspirationImage from '../Images/garden 4.webp'; 
+import chandelier1 from '../Images/PL.webp';
+import chandelier2 from '../Images/PL-2.webp';
+import pendantLight from '../Images/PL-3.webp';
+import ceilingLight from '../Images/PL-4.webp';
+import trackLighting from '../Images/PL.webp';
+import electricalInspiration from '../Images/garden 4.webp'; 
 
 const trendingItems = [
   {
-    title: 'Cool Mist Humidifier | 2.2L | For Office, Indoor Plants...',
-    image: humidifier,
+    title: 'Modern Crystal Chandelier | 6-Light | Dimmable LED',
+    image: chandelier1,
+    price: 'KSh12,499.00',
+    onSale: true,
+  },
+  {
+    title: 'Contemporary LED Chandelier with Remote Control',
+    image: chandelier2,
+    price: 'KSh15,999.00',
+    onSale: true,
+  },
+  {
+    title: 'Industrial Pendant Light | Adjustable Hanging Lamp',
+    image: pendantLight,
     price: 'KSh3,499.00',
     onSale: true,
   },
   {
-    title: 'Kid Kitchen Toddler Wooden Pretend Cooking Set...',
-    image: kitchenToy,
-    price: 'KSh3,499.00',
+    title: 'Smart Ceiling Light | Wi-Fi Enabled | Color Changing',
+    image: ceilingLight,
+    price: 'KSh8,999.00',
+    oldPrice: 'KSh11,500.00',
     onSale: true,
   },
   {
-    title: 'Bathroom wall mounted towel rack accessory with hooks',
-    image: towelRack,
-    price: 'KSh3,499.00',
-    onSale: true,
-  },
-  {
-    title: 'Glass goblet, 370 ML Snifter Glasses | Set of 6',
-    image: glassSet,
-    price: 'KSh1,999.00',
-    oldPrice: 'KSh2,500.00',
-    onSale: true,
-  },
-  {
-    title: 'Adjustable Tilting Laptop Folding Table Stand Desk...',
-    image: laptopTable,
-    price: 'KSh3,499.00',
+    title: 'Track Lighting System | 4 Heads | Adjustable Spotlights',
+    image: trackLighting,
+    price: 'KSh6,499.00',
     onSale: true,
   },
 ];
@@ -49,11 +49,11 @@ const TrendingNow = () => {
   return (
     <section className="trending-now">
       <header className="trending-header">
-        <h2 className="trending-title">Trending Now</h2>
+        <h2 className="trending-title">Trending Electrical Products</h2>
         <button
           className="view-all-button"
           onClick={() => navigate('/trending')}
-          aria-label="View all trending products"
+          aria-label="View all trending electrical products"
         >
           View All
         </button>
@@ -81,20 +81,20 @@ const TrendingNow = () => {
         <div className="inspiration-content">
           <div className="inspiration-image">
             <img
-              src={inspirationImage}
-              alt="Home Inspiration"
+              src={electricalInspiration}
+              alt="Modern Electrical Lighting Solutions"
               loading="lazy"
             />
           </div>
           <div className="inspiration-text">
-            <h2 id="inspiration-heading">Stay Inspired...</h2>
+            <h2 id="inspiration-heading">Illuminate Your Space...</h2>
             <p>
-              Looking to refresh your space or add a touch of personality? Discover unique pieces
-              that elevate your home's style effortlessly. From cozy accents to bold statement decor,
-              find everything you need to express your vibe.
+              Transform your home or office with our premium electrical lighting solutions. 
+              From energy-efficient LED fixtures to smart lighting systems, discover the perfect 
+              illumination to enhance your space's ambiance and functionality.
             </p>
-            <a href="#shop" className="shop-now-btn" aria-label="Shop now">
-              Shop Now
+            <a href="#shop" className="shop-now-btn" aria-label="Shop electrical products now">
+              Shop Lighting
             </a>
           </div>
         </div>

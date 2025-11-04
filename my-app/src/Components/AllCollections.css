@@ -1,7 +1,9 @@
 .all-collections-page {
-  margin-top: 145px;
-  padding: 50px;
+  margin-top: 180px; /* Increased to account for fixed navbar */
+  padding: 30px 50px;
   background-color: #f9f9f9;
+  min-height: calc(100vh - 180px);
+  box-sizing: border-box;
 }
 
 .page-title {
@@ -85,12 +87,48 @@
 }
 
 /* Responsive adjustments */
+@media (max-width: 768px) {
+  .all-collections-page {
+    margin-top: 160px; /* Slightly less on mobile */
+    padding: 20px;
+  }
+  
+  .page-title {
+    font-size: 1.5rem;
+  }
+  
+  .collection-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
 @media (max-width: 600px) {
+  .all-collections-page {
+    margin-top: 150px;
+    padding: 15px;
+  }
+  
   .collection-card h3 {
     font-size: 1.1rem;
   }
 
   .collection-card p {
     font-size: 0.9rem;
+  }
+  
+  .collection-image {
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .all-collections-page {
+    margin-top: 140px;
+  }
+  
+  .collection-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }

@@ -11,13 +11,13 @@ import travel from '../Images/solar.webp';
 import PromoMarquee from './PromoMarquee'; 
 
 const collections = [
-    { name: "Cables", image: garden, path: "/collections/garden" },
-    { name: "Fans $ Accesories", image: storage, path: "/collections/storage" },
-    { name: "Garden Lights", image: kitchen, path: "/collections/kitchen" },
-    { name: "Adaptors $ Extensions", image: appliances, path: "/collections/appliances" },
-    { name: "Gate Lights", image: bedroom, path: "/collections/bedroom" },
-    { name: "Luxury Chandelier Light", image: furniture, path: "/collections/furniture" },
-    { name: "Solar Light", image: travel, path: "/collections/travel" }
+    { name: "Cables", image: garden, path: "/collections/cables" },
+    { name: "Fans & Accessories", image: storage, path: "/collections/fans" },
+    { name: "Garden Lights", image: kitchen, path: "/collections/garden-lights" },
+    { name: "Adaptors & Extensions", image: appliances, path: "/collections/adaptors" },
+    { name: "Gate Lights", image: bedroom, path: "/collections/gate-lights" },
+    { name: "Luxury Chandelier Lights", image: furniture, path: "/collections/chandeliers" },
+    { name: "Solar Lights", image: travel, path: "/collections/solar-lights" }
 ];
 
 function Collections() {
@@ -37,8 +37,7 @@ function Collections() {
             <p>
               View collection <span className="arrow">→</span>
             </p>
-             </div>
-          
+          </div>
         ))}
       </div>
       <PromoMarquee />

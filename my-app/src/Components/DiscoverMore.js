@@ -1,82 +1,170 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import './DiscoverMore.css';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-import homeAccessoriesImg from '../Images/table-lamp.webp';
-import bedroomImg from '../Images/switches.webp';
-import kidsImg from '../Images/out-door.webp';
-import kitchenImg from '../Images/bathroom-lights.webp';
+import tableLampImg from '../Images/table-lamp.webp';
+import switchesImg from '../Images/switches.webp';
+import outdoorLightsImg from '../Images/out-door.webp';
+import bathroomLightsImg from '../Images/bathroom-lights.webp';
+import cablesImg from '../Images/cables.webp';
+import fansImg from '../Images/fans.webp';
+import decorativeLightingImg from '../Images/chandalier.webp';
+import solarLightsImg from '../Images/solar.webp';
 
 const discoverCategories = [
   {
-    title: 'Table Lamp',
-    image: homeAccessoriesImg,
+    title: 'Table Lamps',
+    image: tableLampImg,
     items: [
-      { name: 'LED Desk Lamp', link: '#' },
-      { name: 'Rechargeable Table Light', link: '#' },
+      { name: 'LED Desk Lamp', category: 'table-lamps' },
+      { name: 'Rechargeable Table Light', category: 'table-lamps' },
+      { name: 'Modern Table Lamps', category: 'table-lamps' },
+      { name: 'Reading Lamps', category: 'table-lamps' },
     ],
-    shopLink: '#',
+    shopLink: '/products?category=table-lamps',
   },
   {
     title: 'Switches',
-    image: bedroomImg,
+    image: switchesImg,
     items: [
-      { name: 'Smart Touch Switches', link: '#' },
-      { name: 'Classic Wall Switches', link: '#' },
+      { name: 'Smart Touch Switches', category: 'switches' },
+      { name: 'Classic Wall Switches', category: 'switches' },
+      { name: 'Dimmer Switches', category: 'switches' },
+      { name: 'Gang Switches', category: 'switches' },
     ],
-    shopLink: '#',
+    shopLink: '/products?category=switches',
   },
   {
     title: 'Outdoor Lights',
-    image: kidsImg,
+    image: outdoorLightsImg,
     items: [
-      { name: 'Flood Lights', link: '#' },
-      { name: 'Solar Garden Lamps', link: '#' },
+      { name: 'Flood Lights', category: 'outdoor-lights' },
+      { name: 'Solar Garden Lamps', category: 'outdoor-lights' },
+      { name: 'LED Gate Lights', category: 'outdoor-lights' },
+      { name: 'Pathway Lights', category: 'outdoor-lights' },
     ],
-    shopLink: '#',
+    shopLink: '/products?category=outdoor-lights',
   },
   {
     title: 'Bathroom Lights',
-    image: kitchenImg,
+    image: bathroomLightsImg,
     items: [
-      { name: 'Vanity Mirror Lights', link: '#' },
-      { name: 'Waterproof Ceiling Lights', link: '#' },
+      { name: 'Vanity Mirror Lights', category: 'bathroom-lights' },
+      { name: 'Waterproof Ceiling Lights', category: 'bathroom-lights' },
+      { name: 'Shower Lights', category: 'bathroom-lights' },
+      { name: 'Bathroom Wall Lights', category: 'bathroom-lights' },
     ],
-    shopLink: '#',
+    shopLink: '/products?category=bathroom-lights',
+  },
+  {
+    title: 'Power Cables',
+    image: cablesImg,
+    items: [
+      { name: 'Power Cables', category: 'cables' },
+      { name: 'Extension Cords', category: 'adaptors' },
+      { name: 'Electrical Wires', category: 'cables' },
+      { name: 'Plug Adapters', category: 'adaptors' },
+    ],
+    shopLink: '/products?category=cables',
+  },
+  {
+    title: 'Ceiling Fans',
+    image: fansImg,
+    items: [
+      { name: 'Ceiling Fans', category: 'fans' },
+      { name: 'Energy Efficient Fans', category: 'fans' },
+      { name: 'Remote Control Fans', category: 'fans' },
+      { name: 'Industrial Fans', category: 'fans' },
+    ],
+    shopLink: '/products?category=fans',
+  },
+  {
+    title: 'Decorative Lighting',
+    image: decorativeLightingImg,
+    items: [
+      { name: 'Chandelier Lights', category: 'decorative-lighting' },
+      { name: 'Pendant Lights', category: 'decorative-lighting' },
+      { name: 'Wall Sconces', category: 'decorative-lighting' },
+      { name: 'String Lights', category: 'decorative-lighting' },
+    ],
+    shopLink: '/products?category=decorative-lighting',
+  },
+  {
+    title: 'Solar Lights',
+    image: solarLightsImg,
+    items: [
+      { name: 'Solar Powered Lights', category: 'solar-lights' },
+      { name: 'Solar Garden Lights', category: 'solar-lights' },
+      { name: 'Solar Security Lights', category: 'solar-lights' },
+      { name: 'Solar Street Lights', category: 'solar-lights' },
+    ],
+    shopLink: '/products?category=solar-lights',
   },
 ];
 
 const DiscoverMore = () => {
+  const scrollContainerRef = useRef(null);
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="discover-more">
-      <h2 className="discover-heading">Discover More</h2>
-      <div className="discover-grid">
-        {discoverCategories.map((category, index) => (
-          <div className="discover-card" key={index}>
-            <img
-              src={category.image}
-              alt={category.title}
-              className="discover-image"
-            />
-            <div className="discover-content">
-              <h3 className="discover-title">{category.title}</h3>
-              <ul>
-                {category.items.map((item, idx) => (
-                  <li key={idx}>
-                    <a href={item.link} className="discover-link">
-                      {item.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <div className="shop-all">
-                <a href={category.shopLink} className="shop-all-btn">
-                  <span className="arrow-icon">→</span>
-                  <span className="shop-text">Shop All</span>
-                </a>
+      <div className="discover-header">
+        <h2 className="discover-heading">Discover More Electrical Products</h2>
+        <div className="scroll-controls">
+          <button className="scroll-btn" onClick={scrollLeft} aria-label="Scroll left">
+            <FaChevronLeft />
+          </button>
+          <button className="scroll-btn" onClick={scrollRight} aria-label="Scroll right">
+            <FaChevronRight />
+          </button>
+        </div>
+      </div>
+      
+      <div className="discover-container">
+        <div className="discover-scroll" ref={scrollContainerRef}>
+          {discoverCategories.map((category, index) => (
+            <div className="discover-card" key={index}>
+              <img
+                src={category.image}
+                alt={category.title}
+                className="discover-image"
+              />
+              <div className="discover-content">
+                <h3 className="discover-title">{category.title}</h3>
+                <ul>
+                  {category.items.map((item, idx) => (
+                    <li key={idx}>
+                      <Link 
+                        to={`/products?category=${item.category}`} 
+                        className="discover-link"
+                      >
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <div className="shop-all">
+                  <Link to={category.shopLink} className="shop-all-btn">
+                    <span className="arrow-icon">→</span>
+                    <span className="shop-text">Shop All {category.title}</span>
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

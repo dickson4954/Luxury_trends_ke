@@ -2,22 +2,23 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AllCollections.css'; 
 
-import garden from '../Images/garden.jpg';
-import storage from '../Images/storage.jpg';
-import kitchen from '../Images/kitchen.avif';
-import appliances from '../Images/appliances.jpeg';
-import bedroom from '../Images/Bedroom.jpeg';
-import furniture from '../Images/furniture.jpeg';
-import travel from '../Images/travel.jpeg';
+// Import images for electrical collections
+import cables from '../Images/cables.webp';
+import fans from '../Images/fans.webp';
+import gardenLights from '../Images/garden1.webp';
+import adaptors from '../Images/adaptor.webp';
+import gateLights from '../Images/gate.webp';
+import chandeliers from '../Images/chandalier.webp';
+import solar from '../Images/solar.webp';
 
 const collections = [
-  { name: "Garden & Outdoor", image: garden, path: "/collections/garden" },
-  { name: "Storage & Organization", image: storage, path: "/collections/storage" },
-  { name: "Kitchen", image: kitchen, path: "/collections/kitchen" },
-  { name: "Appliances", image: appliances, path: "/collections/appliances" },
-  { name: "Bedroom", image: bedroom, path: "/collections/bedroom" },
-  { name: "Furniture", image: furniture, path: "/collections/furniture" },
-  { name: "Travel", image: travel, path: "/collections/travel" }
+  { name: "Cables", image: cables, path: "/collections/cables" },
+  { name: "Fans & Accessories", image: fans, path: "/collections/fans" },
+  { name: "Garden Lights", image: gardenLights, path: "/collections/garden-lights" },
+  { name: "Adaptors & Extensions", image: adaptors, path: "/collections/adaptors" },
+  { name: "Gate Lights", image: gateLights, path: "/collections/gate-lights" },
+  { name: "Chandeliers", image: chandeliers, path: "/collections/chandeliers" },
+  { name: "Solar Lights", image: solar, path: "/collections/solar-lights" }
 ];
 
 function AllCollections() {
@@ -25,7 +26,7 @@ function AllCollections() {
 
   return (
     <div className="all-collections-page">
-      <h2 className="page-title">All Collections</h2>
+      <h2 className="page-title">All Electrical Collections</h2>
       <div className="collection-grid">
         {collections.map((col, index) => (
           <div key={index} className="collection-card" onClick={() => navigate(col.path)}>
