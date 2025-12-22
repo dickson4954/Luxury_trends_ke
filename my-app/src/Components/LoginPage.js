@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../Components/LoginPage.css";
 
 const LoginPage = () => {
@@ -12,6 +13,7 @@ const LoginPage = () => {
   });
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
@@ -57,42 +59,90 @@ const LoginPage = () => {
 
     setLoading(true);
 
-    const endpoint = isLogin ? "/login" : "/register";
-    const payload = isLogin
-      ? {
-          username: formData.username_or_email,
-          password: formData.password,
+    if (isLogin) {
+      // LOGIN - Connect to actual backend
+      try {
+        const res = await fetch("http://127.0.0.1:5000/api/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: formData.username_or_email,
+            password: formData.password,
+          }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("isAdmin", data.is_admin);
+          
+          setMessage({ 
+            type: "success", 
+            text: data.message || "Login successful! Redirecting..." 
+          });
+
+          // Automatically redirect to admin dashboard for admin users
+          setTimeout(() => {
+            navigate("/admin-dashboard");
+          }, 1500);
+          
+        } else {
+          setMessage({ 
+            type: "error", 
+            text: data.message || "Login failed. Please check your credentials." 
+          });
         }
-      : {
-          full_name: formData.fullName,
-          username: formData.username,
-          email: formData.email,
-          password: formData.password,
-        };
-
-    try {
-      const res = await fetch(`http://127.0.0.1:5000${endpoint}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        localStorage.setItem("token", data.token); 
-        setMessage({ type: "success", text: data.message || "Success!" });
-
-      
-      } else {
-        setMessage({ type: "error", text: data.message || "Something went wrong." });
+      } catch (err) {
+        setMessage({ type: "error", text: "Network error. Please try again." });
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      setMessage({ type: "error", text: "Network error. Please try again." });
-    } finally {
-      setLoading(false);
+    } else {
+      // REGISTRATION - Connect to actual backend
+      try {
+        const res = await fetch("http://127.0.0.1:5000/api/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            full_name: formData.fullName,
+            username: formData.username,
+            email: formData.email,
+            password: formData.password,
+          }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("isAdmin", data.user.is_admin);
+          
+          setMessage({ 
+            type: "success", 
+            text: data.message || "Registration successful!" 
+          });
+
+          // For registration, you might want to redirect to login or home
+          setTimeout(() => {
+            navigate("/");
+          }, 1500);
+          
+        } else {
+          setMessage({ 
+            type: "error", 
+            text: data.message || "Registration failed." 
+          });
+        }
+      } catch (err) {
+        setMessage({ type: "error", text: "Network error. Please try again." });
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -104,7 +154,11 @@ const LoginPage = () => {
             className={isLogin ? "login-form" : "register-form"}
             onSubmit={handleSubmit}
           >
-            <h2>{isLogin ? "LOGIN" : "REGISTER"}</h2>
+            <h2>{isLogin ? "ITURIU ELECTRICALS ADMIN" : "REGISTER"}</h2>
+            <p style={{ textAlign: 'center', color: '#666', fontSize: '14px', marginBottom: '20px' }}>
+              {isLogin ? "Admin Access Only" : "Create new account"}
+            </p>
+            
             {message && <div className={`message ${message.type}`}>{message.text}</div>}
 
             {!isLogin && (
@@ -139,7 +193,7 @@ const LoginPage = () => {
             {isLogin && (
               <input
                 type="text"
-                placeholder="Username or Email *"
+                placeholder="Admin Username or Email *"
                 name="username_or_email"
                 value={formData.username_or_email}
                 onChange={handleInputChange}
@@ -163,7 +217,7 @@ const LoginPage = () => {
             <p className="message">
               {isLogin ? "Not registered? " : "Already registered? "}
               <button type="button" className="toggle-btn" onClick={toggleForm}>
-                {isLogin ? "Create an account" : "Sign In"}
+                {isLogin ? "Create an account" : "Admin Login"}
               </button>
             </p>
           </form>
