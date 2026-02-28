@@ -1,16 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Cart.css';
 import { FaTimes, FaPlus, FaMinus, FaTrash } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useCart } from '../Components/CartContext';
 import productsData from './Products';
 import OrderNowModal from './OrderNowModal';
 
 const Cart = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { cartItems, removeFromCart, updateQty, addToCart } = useCart();
 
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+  
+  // Check if we're on the cart page
+  const isCartPage = location.pathname === '/cart';
+
+  useEffect(() => {
+    // If we're on the cart page, don't show the popup cart
+    if (isCartPage && isOpen) {
+      onClose();
+    }
+  }, [isCartPage, isOpen, onClose]);
+
+  // Don't render the popup cart if we're on the cart page
+  if (isCartPage) {
+    return null;
+  }
 
   const handleStartShopping = () => {
     onClose();
@@ -63,7 +79,15 @@ const Cart = ({ isOpen, onClose }) => {
       <div className={`cart-panel ${isOpen ? 'open' : ''}`}>
         <div className="cart-header">
           <h2>Your cart</h2>
-          <a onClick={handleStartShopping} className="view-cart" tabIndex={0} role="button">
+          <a 
+            onClick={() => {
+              onClose();
+              navigate('/cart');
+            }} 
+            className="view-cart" 
+            tabIndex={0} 
+            role="button"
+          >
             View cart
           </a>
           <button className="close-btn" onClick={onClose} aria-label="Close cart">
