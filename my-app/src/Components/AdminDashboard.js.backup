@@ -1,3 +1,4 @@
+cat > src/Components/AdminDashboard.js << 'EOF'
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminDashboard.css';
@@ -7,8 +8,7 @@ import {
   FaArrowUp, FaArrowDown, FaCheckCircle, FaClock, FaTools, 
   FaDatabase, FaImage, FaHome, FaSpinner, 
   FaExclamationTriangle, FaSync, FaEye, FaEdit,
-  FaSearch, FaCalendarAlt, FaDownload, FaPlus,
-  FaLayerGroup  // Add this icon for categories
+  FaSearch, FaCalendarAlt, FaDownload, FaPlus
 } from 'react-icons/fa';
 import { Line, Pie } from 'react-chartjs-2';
 import {
@@ -36,26 +36,6 @@ ChartJS.register(
   ArcElement,
   Filler
 );
-
-// Sample data for fallback
-const sampleOrders = [
-  { id: 1, order_number: '1001', customer_name: 'John Doe', total_amount: 12500, order_status: 'completed', created_at: '2025-12-08' },
-  { id: 2, order_number: '1002', customer_name: 'Jane Smith', total_amount: 8450, order_status: 'processing', created_at: '2025-12-08' },
-  { id: 3, order_number: '1003', customer_name: 'Mike Johnson', total_amount: 15600, order_status: 'pending', created_at: '2025-12-07' },
-  { id: 4, order_number: '1004', customer_name: 'Sarah Williams', total_amount: 9200, order_status: 'completed', created_at: '2025-12-07' },
-  { id: 5, order_number: '1005', customer_name: 'David Brown', total_amount: 6350, order_status: 'processing', created_at: '2025-12-06' },
-];
-
-const sampleActivities = [
-  { id: 1, text: 'New order #1006 received', time: '5 min ago', icon: '🛒', type: 'order' },
-  { id: 2, text: 'Product "LED Bulbs" updated', time: '1 hour ago', icon: '📦', type: 'product' },
-  { id: 3, text: 'New customer registered', time: '2 hours ago', icon: '👤', type: 'customer' },
-];
-
-const sampleLowStock = [
-  { id: 1, name: 'LED Bulbs 12W', stock: 5, threshold: 10 },
-  { id: 2, name: 'Extension Cord 5m', stock: 3, threshold: 8 },
-];
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -91,31 +71,12 @@ const AdminDashboard = () => {
   const sidebarMenu = [
     { id: 'dashboard', label: 'Dashboard', icon: <FaTachometerAlt /> },
     { id: 'products', label: 'Products', icon: <FaBox />, badge: dashboardStats.lowStockProducts?.length || '0' },
-    { id: 'categories', label: 'Categories', icon: <FaLayerGroup /> }, // Add categories menu item
     { id: 'orders', label: 'Orders', icon: <FaShoppingCart />, badge: dashboardStats.totalOrders || '0' },
     { id: 'customers', label: 'Customers', icon: <FaUsers /> },
     { id: 'analytics', label: 'Analytics', icon: <FaChartLine /> },
     { id: 'reports', label: 'Reports', icon: <FaFileAlt /> },
     { id: 'settings', label: 'Settings', icon: <FaCog /> },
   ];
-
-  const generateSalesData = (range) => {
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const data = [];
-    
-    let labels = range === 'week' 
-      ? ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-      : months.slice(0, range === 'month' ? 30 : 90);
-    
-    for (let i = 0; i < labels.length; i++) {
-      data.push({
-        label: labels[i],
-        revenue: Math.floor(Math.random() * 50000) + 20000
-      });
-    }
-    
-    return data;
-  };
 
   const fetchDashboardData = useCallback(async (showRefresh = false) => {
     if (showRefresh) setRefreshing(true);
@@ -127,6 +88,7 @@ const AdminDashboard = () => {
         return;
       }
 
+      // Fetch all data in parallel
       const [stats, recentOrders, lowStock, recentCustomers] = await Promise.all([
         api.admin.getStats().catch(() => null),
         api.admin.getRecentOrders().catch(() => ({ orders: [] })),
@@ -134,6 +96,7 @@ const AdminDashboard = () => {
         api.admin.getRecentCustomers().catch(() => ({ customers: [] }))
       ]);
 
+      // Generate activities from real data
       const activities = [
         ...(recentOrders?.orders?.slice(0, 2).map(order => ({
           id: `order-${order.id}`,
@@ -158,6 +121,7 @@ const AdminDashboard = () => {
         })) || [])
       ];
 
+      // Order status distribution
       const orderStatusData = [
         { status: 'Pending', count: 10, color: '#FFC107' },
         { status: 'Processing', count: 20, color: '#2196F3' },
@@ -165,6 +129,7 @@ const AdminDashboard = () => {
         { status: 'Cancelled', count: 5, color: '#F44336' },
       ];
 
+      // Generate sales data
       const salesData = stats?.salesData || generateSalesData(dateRange);
 
       setDashboardStats({
@@ -176,12 +141,12 @@ const AdminDashboard = () => {
         ordersChange: stats?.ordersChange || 12.3,
         productsChange: 8.2,
         customersChange: 5.7,
-        recentOrders: recentOrders?.orders || sampleOrders,
-        recentActivities: activities.length > 0 ? activities : sampleActivities,
+        recentOrders: recentOrders?.orders || [],
+        recentActivities: activities,
         salesData: salesData,
         orderStatusData: orderStatusData,
         topProducts: stats?.topProducts || [],
-        lowStockProducts: lowStock?.products || sampleLowStock
+        lowStockProducts: lowStock?.products || []
       });
 
       setError(null);
@@ -189,6 +154,7 @@ const AdminDashboard = () => {
       console.error('Error fetching dashboard data:', err);
       setError('Failed to load dashboard data. Using sample data.');
       
+      // Fallback to sample data
       setDashboardStats(prev => ({
         ...prev,
         recentOrders: sampleOrders,
@@ -203,6 +169,45 @@ const AdminDashboard = () => {
       setLoading(false);
     }
   }, [dateRange, navigate]);
+
+  // Sample data for fallback
+  const sampleOrders = [
+    { id: 1, order_number: '1001', customer_name: 'John Doe', total_amount: 12500, order_status: 'completed', created_at: '2025-12-08' },
+    { id: 2, order_number: '1002', customer_name: 'Jane Smith', total_amount: 8450, order_status: 'processing', created_at: '2025-12-08' },
+    { id: 3, order_number: '1003', customer_name: 'Mike Johnson', total_amount: 15600, order_status: 'pending', created_at: '2025-12-07' },
+    { id: 4, order_number: '1004', customer_name: 'Sarah Williams', total_amount: 9200, order_status: 'completed', created_at: '2025-12-07' },
+    { id: 5, order_number: '1005', customer_name: 'David Brown', total_amount: 6350, order_status: 'processing', created_at: '2025-12-06' },
+  ];
+
+  const sampleActivities = [
+    { id: 1, text: 'New order #1006 received', time: '5 min ago', icon: '🛒', type: 'order' },
+    { id: 2, text: 'Product "LED Bulbs" updated', time: '1 hour ago', icon: '📦', type: 'product' },
+    { id: 3, text: 'New customer registered', time: '2 hours ago', icon: '👤', type: 'customer' },
+  ];
+
+  const sampleLowStock = [
+    { id: 1, name: 'LED Bulbs 12W', stock: 5, threshold: 10 },
+    { id: 2, name: 'Extension Cord 5m', stock: 3, threshold: 8 },
+  ];
+
+  const generateSalesData = (range) => {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const data = [];
+    
+    let numPoints = range === 'week' ? 7 : range === 'month' ? 30 : 90;
+    let labels = range === 'week' 
+      ? ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+      : months.slice(0, numPoints);
+    
+    for (let i = 0; i < labels.length; i++) {
+      data.push({
+        label: labels[i],
+        revenue: Math.floor(Math.random() * 50000) + 20000
+      });
+    }
+    
+    return data;
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -250,17 +255,7 @@ const AdminDashboard = () => {
   const handleNavigation = (section) => {
     setActiveSection(section);
     setShowMobileMenu(false);
-    
-    // Handle navigation for different sections
-    if (section === "products") { 
-      navigate("/admin/products"); 
-    } else if (section === "categories") {
-      navigate("/admin/categories");
-    } else if (section === "dashboard") {
-      navigate("/admin-dashboard");
-    } else { 
-      navigate(`/admin/${section}`);
-    }
+    navigate(`/admin/${section}`);
   };
 
   const renderStatusIcon = (status) => {
@@ -283,6 +278,7 @@ const AdminDashboard = () => {
     }
   };
 
+  // Prepare chart data
   const salesChartData = {
     labels: dashboardStats.salesData.map(d => d.label),
     datasets: [{
@@ -489,9 +485,6 @@ const AdminDashboard = () => {
           <button className="quick-action-btn" onClick={() => navigate('/admin/products/new')}>
             <FaPlus /> Add Product
           </button>
-          <button className="quick-action-btn" onClick={() => navigate('/admin/categories')}>
-            <FaLayerGroup /> Manage Categories
-          </button>
           <button className="quick-action-btn" onClick={() => navigate('/admin/orders')}>
             <FaShoppingCart /> View Orders
           </button>
@@ -690,3 +683,6 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+EOF
+
+echo "✅ AdminDashboard.js updated with API integration"

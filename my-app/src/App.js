@@ -9,11 +9,13 @@ import TrendingAll from './Components/TrendingAll';
 import TrendingNow from './Components/TrendingNow';
 import AllProducts from './Components/AllProducts';
 import ProductDetails from './Components/ProductDetails';
-// In App.js, change this import:
-import CartPage from './pages/CartPage'; // Change from './Components/CartPage'
+import CartPage from './pages/CartPage';
 import PaymentPage from './Components/PaymentPage';
 import LoginPage from './Components/LoginPage';
 import AdminDashboard from './Components/AdminDashboard';
+import AdminProducts from './Components/Admin/AdminProducts';
+import AdminProductForm from './Components/Admin/AdminProductForm';
+import AdminCategories from './Components/Admin/AdminCategories'; // Add this import
 import Footer from './Components/Footer';
 import './App.css';
 
@@ -26,12 +28,10 @@ const MainLayout = ({ children }) => (
   </>
 );
 
-// Layout for pages WITHOUT Navbar (for Cart page)
+// Layout for pages WITHOUT Navbar
 const NoNavbarLayout = ({ children }) => (
   <>
     {children}
-    {/* Optionally add footer here if you want it */}
-    {/* <Footer /> */}
   </>
 );
 
@@ -39,7 +39,7 @@ const App = () => {
   return (
     <div className="App">
       <Routes>
-        {/* Pages WITH Navbar */}
+        {/* Public Pages WITH Navbar */}
         <Route path="/" element={
           <MainLayout>
             <LandingPage />
@@ -91,15 +91,19 @@ const App = () => {
           </MainLayout>
         } />
         
-        {/* Cart page WITHOUT Navbar - using CartPage component */}
+        {/* Cart page WITHOUT Navbar */}
         <Route path="/cart" element={
           <NoNavbarLayout>
             <CartPage />
           </NoNavbarLayout>
         } />
         
-        {/* Admin dashboard WITHOUT Navbar & Footer */}
+        {/* Admin Routes - WITHOUT Navbar & Footer */}
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/products" element={<AdminProducts />} />
+        <Route path="/admin/products/new" element={<AdminProductForm />} />
+        <Route path="/admin/products/edit/:id" element={<AdminProductForm />} />
+        <Route path="/admin/categories" element={<AdminCategories />} /> {/* Add this route */}
       </Routes>
     </div>
   );
